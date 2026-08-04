@@ -33,8 +33,21 @@ re-hosting, redistributing or adapting the work.
 2. THIRD-PARTY MATERIAL
 --------------------------------------------------------------------------
 
-This dashboard bundles no third-party images, media, fonts or libraries. It
-is a single self-contained HTML file with no external requests.
+The animated SVG explainers are original work by the copyright holder and
+are covered by section 1 above.
+
+The clinical photographs and micrographs in `assets/lab/` are NOT owned by
+the copyright holder and are NOT covered by the reservation of rights
+above. Each is a third-party work reproduced from Wikimedia Commons under
+its own licence - public domain, CC0, CC BY, or CC BY-SA. Every image
+retains its original licence and its original author's rights. Attribution
+is recorded for each image in `assets/lab-images.json` and displayed
+beneath the corresponding figure. Anyone reusing an individual photograph
+must comply with that photograph's own licence, not with this file; images
+under CC BY-SA carry share-alike obligations this notice cannot override.
+
+Apart from those images the dashboard bundles no third-party media, fonts
+or libraries, and makes no external requests.
 
 Instrument, platform and assay names referred to in the teaching text
 (for example BACTEC, VITEK, MicroScan, Phoenix, GeneXpert, BioFire,
