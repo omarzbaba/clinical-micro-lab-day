@@ -304,7 +304,7 @@ footer p{font-size:.83rem;color:var(--muted);margin-bottom:8px}
     <span class="eyebrow">02 · Follow the specimen</span>
     <h2 class="sec">From the tube to the report.</h2>
     <p class="sec-sub">Every specimen takes the same seven steps. Click through them.</p>
-    <div class="journey" id="journey" style="margin-top:16px"></div>
+    <div class="journey" id="journeySteps" style="margin-top:16px"></div>
     <div class="jdetail" id="jdetail"></div>
   </section>
 
@@ -321,28 +321,28 @@ footer p{font-size:.83rem;color:var(--muted);margin-bottom:8px}
     <h2 class="sec">How we actually test.</h2>
     <p class="sec-sub">From a 60-second Gram stain to a multiplex panel. Filter by family.</p>
     <div class="fchips" id="fchips" style="margin-top:16px"></div>
-    <div class="grid g2" id="methods"></div>
+    <div class="grid g2" id="methodGrid"></div>
   </section>
 
   <section id="cards" class="wrap">
     <span class="eyebrow">05 · Know these</span>
     <h2 class="sec">Organism flashcards.</h2>
     <p class="sec-sub hintline">Tap a card to flip it. These are the ones worth recognizing by the end of the day.</p>
-    <div class="fgrid" id="cards" style="margin-top:8px"></div>
+    <div class="fgrid" id="cardGrid" style="margin-top:8px"></div>
   </section>
 
   <section id="game" class="wrap">
     <span class="eyebrow">06 · Your turn</span>
     <h2 class="sec">Which bench does it go to?</h2>
     <p class="sec-sub">A specimen just arrived. Route it.</p>
-    <div class="game" id="game" style="margin-top:16px"></div>
+    <div class="game" id="gameBox" style="margin-top:16px"></div>
   </section>
 
   <section id="quiz" class="wrap">
     <span class="eyebrow">07 · Checkpoint</span>
     <h2 class="sec">Twelve quick questions.</h2>
     <p class="sec-sub">Instant feedback and a pearl on every one. Nothing is recorded — this is just for you.</p>
-    <div id="quiz" style="margin-top:16px"></div>
+    <div id="quizList" style="margin-top:16px"></div>
     <div class="score" id="score">Score <span id="sc">0</span> / <span id="sa">0</span></div>
   </section>
 </main>
@@ -401,9 +401,9 @@ function renderDisciplines(){
 let jSel=0;
 function renderJourney(){
   const w=DATA.workflow||[];
-  $('#journey').innerHTML=w.map((s,i)=>`<button class="jstep${i===jSel?' on':''}" data-i="${i}">
+  $('#journeySteps').innerHTML=w.map((s,i)=>`<button class="jstep${i===jSel?' on':''}" data-i="${i}">
     <span class="jnum">STEP ${s.step}</span><b>${esc(s.name)}</b></button>`).join('');
-  $$('#journey .jstep').forEach(b=>b.onclick=()=>{jSel=+b.dataset.i;renderJourney();});
+  $$('#journeySteps .jstep').forEach(b=>b.onclick=()=>{jSel=+b.dataset.i;renderJourney();});
   const s=w[jSel]; if(!s)return;
   $('#jdetail').innerHTML=`<h4>${s.step}. ${esc(s.name)}</h4><p>${esc(s.what)}</p>
     <div class="jwhy"><b>Why it matters — </b>${esc(s.why)}</div>
@@ -436,7 +436,7 @@ function renderBenches(){
 /* ---------- methods ---------- */
 function renderMethods(f){
   const ms=(DATA.methods||[]).filter(m=>!f||f==='all'||m.family===f);
-  $('#methods').innerHTML=ms.map(m=>`
+  $('#methodGrid').innerHTML=ms.map(m=>`
     <article class="mcard" style="--c:var(--${FAM[m.family]||'accent'})">
       <div class="mfam">${esc(m.family)}</div>
       <h4>${esc(m.name)}</h4><p>${esc(m.what)}</p>
@@ -454,20 +454,20 @@ function renderFilters(){
 
 /* ---------- flashcards ---------- */
 function renderCards(){
-  $('#cards').innerHTML=(DATA.flashcards||[]).map(c=>`
+  $('#cardGrid').innerHTML=(DATA.flashcards||[]).map(c=>`
     <button class="flip" style="--c:var(--${c.discipline||'accent'})"><div class="flip-in">
       <div class="face front"><span class="gtag">${esc(c.gram)}</span><b>${esc(c.name)}</b><small>${esc(c.source)}</small></div>
       <div class="face back"><div class="k">Key test</div><div class="v">${esc(c.keyTest)}</div>
         <div class="k">Remember</div><div class="v">${esc(c.oneLiner)}</div></div>
     </div></button>`).join('');
-  $$('#cards .flip').forEach(b=>b.onclick=()=>b.classList.toggle('on'));
+  $$('#cardGrid .flip').forEach(b=>b.onclick=()=>b.classList.toggle('on'));
 }
 
 /* ---------- bench game ---------- */
 let gI=0,gScore=0,gDone=false;
 function renderGame(){
   const items=DATA.benchGame||[]; const it=items[gI];
-  const el=$('#game');
+  const el=$('#gameBox');
   if(!it){el.innerHTML=`<h3 style="font-size:1.1rem">Nice work — ${gScore} / ${items.length} routed correctly.</h3>
     <div class="gbar"><button class="btn" id="greset">Play again</button></div>`;
     $('#greset').onclick=()=>{gI=0;gScore=0;gDone=false;renderGame();};return;}
@@ -479,11 +479,11 @@ function renderGame(){
     <div class="gbar"><div class="gprog"><i style="width:${(gI/items.length)*100}%"></i></div>
       <span style="font-size:.8rem;font-weight:700;color:var(--muted)">${gScore} correct</span>
       <button class="btn ghost" id="gnext" style="display:none">Next specimen</button></div>`;
-  $$('#game .gopt').forEach(b=>b.onclick=()=>{
+  $$('#gameBox .gopt').forEach(b=>b.onclick=()=>{
     if(gDone)return; gDone=true;
     const ok=b.dataset.b===it.bench;
     if(ok)gScore++;
-    $$('#game .gopt').forEach(x=>{x.disabled=true;
+    $$('#gameBox .gopt').forEach(x=>{x.disabled=true;
       if(x.dataset.b===it.bench)x.classList.add('right');
       else if(x===b)x.classList.add('wrong');});
     const fb=$('#gfb'); fb.innerHTML=`<b>${ok?'Correct.':'Not quite — it goes to the '+BENCHNAME[it.bench].toLowerCase()+' bench.'}</b> ${esc(it.why)}`;
@@ -497,13 +497,13 @@ let qScore=0,qAns=0;
 function renderQuiz(){
   const qs=DATA.quiz||[];
   $('#sa').textContent=qs.length;
-  $('#quiz').innerHTML=qs.map((q,i)=>`
+  $('#quizList').innerHTML=qs.map((q,i)=>`
     <article class="q" data-i="${i}">
       <div class="qn">Q${i+1}</div><p class="qs">${esc(q.stem)}</p>
       <div class="qo">${q.opts.map((o,j)=>`<button class="opt" data-j="${j}"><span class="key">${KEYS[j]}</span><span>${esc(o)}</span></button>`).join('')}</div>
       <div class="qex"></div>
     </article>`).join('');
-  $$('#quiz .q').forEach((card,i)=>{
+  $$('#quizList .q').forEach((card,i)=>{
     const q=qs[i];
     $$('.opt',card).forEach(b=>b.onclick=()=>{
       if(card.dataset.done)return; card.dataset.done='1';
