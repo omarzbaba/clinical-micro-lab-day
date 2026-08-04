@@ -1,0 +1,64 @@
+Copyright (c) 2026 Omar Z Baba, MD. All rights reserved.
+
+LAB DAY - A DAY IN CLINICAL MICROBIOLOGY
+An interactive orientation dashboard for medical students rotating through a
+hospital clinical microbiology laboratory.
+
+--------------------------------------------------------------------------
+1. ORIGINAL WORK
+--------------------------------------------------------------------------
+
+All material in this repository is the exclusive property of the copyright
+holder. This includes, without limitation:
+
+  - the curriculum design, learning objectives and information architecture;
+  - all written teaching content and explanatory prose;
+  - the question bank, answer explanations and teaching pearls;
+  - the organism flashcards and the specimen-routing exercise;
+  - the design system (colour tokens, typography, layout and components);
+  - the HTML, CSS and JavaScript source code;
+  - the selection, coordination and arrangement of all of the above,
+    which constitutes a protected compilation.
+
+No part of this work may be reproduced, distributed, publicly displayed,
+performed, adapted, translated, or used to create derivative works, in
+whole or in part, by any means, without the prior written permission of the
+copyright holder.
+
+Viewing the published site in a web browser for personal or educational
+reading is permitted. That permission does not extend to copying,
+re-hosting, redistributing or adapting the work.
+
+--------------------------------------------------------------------------
+2. THIRD-PARTY MATERIAL
+--------------------------------------------------------------------------
+
+This dashboard bundles no third-party images, media, fonts or libraries. It
+is a single self-contained HTML file with no external requests.
+
+Instrument, platform and assay names referred to in the teaching text
+(for example BACTEC, VITEK, MicroScan, Phoenix, GeneXpert, BioFire,
+MALDI-TOF) are the trademarks of their respective owners and are used here
+only descriptively, to name equipment a student will encounter on the
+bench. No affiliation, sponsorship or endorsement is implied.
+
+--------------------------------------------------------------------------
+3. NO WARRANTY / NOT MEDICAL ADVICE
+--------------------------------------------------------------------------
+
+This dashboard is an educational orientation aid. It is not a clinical
+protocol, not a laboratory standard operating procedure, and not a
+substitute for institutional policy or the judgement of the laboratory
+director. Media, panels, instruments, incubation practices, biosafety
+requirements and turnaround times vary between laboratories and must be
+confirmed against local practice.
+
+THE WORK IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
+ARISING FROM, OUT OF, OR IN CONNECTION WITH THE WORK OR ITS USE.
+
+--------------------------------------------------------------------------
+
+For permissions and licensing enquiries, contact the copyright holder.
