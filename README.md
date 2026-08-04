@@ -16,6 +16,7 @@ A **fun, compact, interactive** one-day orientation to the hospital clinical mic
 | **The journey** | A clickable 7-step walk from specimen receipt through accessioning, adequacy, direct exam, plating, reading/identification, to susceptibility and reporting |
 | **The benches** | Urine, respiratory, blood, stool, wound and sterile-fluid benches — media set up, incubation, what the tech looks for, common isolates, and each bench's classic trap |
 | **The toolbox** | 14 test methods filterable by family: Gram stain, media, colony morphology, biochemicals, strip assays, disks, rapid antigen, MALDI-TOF, automated ID/AST, blood culture instruments, disk diffusion, broth microdilution, targeted PCR/GeneXpert, multiplex panels/BioFire |
+| **Follow the algorithm** | Five interactive identification decision trees you walk one answer at a time — gram-positive cocci (catalase → coagulase → hemolysis → optochin/bacitracin/bile esculin), gram-negative rods (oxidase → lactose), gram-positive rods, yeast, and a positive blood culture workflow. Each has a "show the whole tree" outline view |
 | **Watch it work** | Six looping CSS/SVG animations: the four Gram stain steps, streaking for isolation, overnight colony growth, a blood culture flagging positive, disk-diffusion zones, and a PCR amplification curve |
 | **Through the scope** | 10 real freely-licensed stains, plates and bench results, each credited |
 | **Flashcards** | 16 flip cards of the organisms worth recognizing by the end of the day |
