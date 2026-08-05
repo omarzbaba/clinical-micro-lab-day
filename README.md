@@ -10,6 +10,18 @@ A **fun, compact, interactive** one-day orientation to the hospital clinical mic
 
 ## What's inside
 
+## How it is organised
+
+The dashboard is split into **ten chapters** shown one at a time — a tab strip in the
+sticky header, a progress hairline, and a previous/next pager at the foot of each
+chapter. Chapter links are shareable (`#biosafety`, `#algorithms`, …) and a legacy
+section anchor still resolves to its chapter. Nothing is a 30,000px scroll any more:
+the largest chapter is the glossary, which you search rather than read.
+
+`Welcome · Biosafety · Journey · How we test · Watch · Algorithms · Report · Practice · Glossary · Recap`
+
+
+
 | Section | What it does |
 |---|---|
 | **Biosafety** | Biosafety levels 1–4, the non-negotiables, six stop-work sentinel organisms with their bench clues, PPE, exposure first aid and spill response |

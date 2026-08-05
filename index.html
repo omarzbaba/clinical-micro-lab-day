@@ -245,6 +245,27 @@ html[data-theme="dark"] .moon{display:none} html[data-theme="light"] .sun{displa
 .score{position:sticky;bottom:14px;margin-top:14px;display:flex;align-items:center;gap:12px;padding:11px 16px;border-radius:99px;
   background:var(--ink);color:var(--bg);box-shadow:var(--shadow-lg);font-size:.85rem;font-weight:700;width:fit-content}
 
+
+/* one question on screen at a time */
+#quizList .q{display:none;margin-bottom:0}
+#quizList .q.on{display:block;animation:pop .28s var(--ease)}
+#quizList.review .q{display:block;margin-bottom:17px}
+.qbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+.qstep{font-size:.82rem;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.qpips{display:flex;gap:6px;flex-wrap:wrap}
+.qpip{width:12px;height:12px;border-radius:50%;background:var(--line-2);border:2px solid transparent;padding:0;cursor:pointer;
+  transition:transform var(--dur) var(--ease),background var(--dur),border-color var(--dur)}
+.qpip:hover{transform:scale(1.25)}
+.qpip.on{border-color:var(--ink);transform:scale(1.3)}
+.qpip.ok{background:var(--parasitology)}
+.qpip.no{background:var(--bacteriology)}
+.qnav{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;align-items:center}
+.qdone{display:none;margin-top:18px;padding:22px;border-radius:var(--r);background:var(--surface);
+  border:2px solid var(--line);border-left:6px solid var(--parasitology);box-shadow:var(--shadow)}
+.qdone.show{display:block;animation:pop .3s var(--ease)}
+.qdone .big{font:800 2.1rem/1 var(--font);letter-spacing:-.04em}
+.qdone p{margin-top:7px;color:var(--muted);font-size:.9rem;line-height:1.6}
+
 /* ---------- footer ---------- */
 footer{margin-top:20px;border-top:2px solid var(--line);background:var(--bg-2)}
 footer .wrap{padding-top:26px;padding-bottom:40px}
@@ -256,7 +277,7 @@ footer p{font-size:.83rem;color:var(--muted);margin-bottom:8px}
 @media(max-width:960px){.g4{grid-template-columns:repeat(2,1fr)}.fgrid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:760px){
   .g2,.g3,.g4{grid-template-columns:1fr}.fgrid{grid-template-columns:repeat(2,1fr)}
-  .bbody{grid-template-columns:1fr}.chips{display:none}
+  .bbody{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
 
@@ -445,6 +466,8 @@ footer p{font-size:.83rem;color:var(--muted);margin-bottom:8px}
 .bsl .lv{font-family:var(--mono);font-size:.72rem;font-weight:800;color:var(--c);letter-spacing:.06em}
 .bsl h4{font-size:1rem;margin-top:2px}
 .bsl .sum{font-size:.87rem;color:var(--muted);margin-top:7px;line-height:1.6}
+.bsl.fold h4,.stage.fold h4{font-size:.98rem;line-height:1.35}
+.bsl.fold .fold-body,.stage.fold .fold-body{max-width:78ch}
 .bsl .work{font-size:.84rem;margin-top:12px;padding:11px 13px;border-radius:var(--r-sm);background:var(--surface-2);line-height:1.55}
 
 .danger{background:color-mix(in srgb,var(--bacteriology) 10%,var(--surface));
@@ -523,6 +546,51 @@ table.tt{width:100%;border-collapse:collapse;font-size:.84rem}
 
 @media(max-width:960px){.sirgrid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:680px){.rules,.sirgrid{grid-template-columns:1fr}.sentrow{grid-template-columns:1fr;gap:6px}}
+
+/* ============================================================
+   CHAPTERS (tabbed views) — one chapter on screen at a time
+   ============================================================ */
+.tabs{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{font:inherit;font-size:.78rem;font-weight:700;padding:7px 11px;border-radius:99px;border:2px solid transparent;
+  background:none;color:var(--muted);white-space:nowrap;cursor:pointer;transition:background var(--dur),color var(--dur),border-color var(--dur)}
+.tabs button:hover{color:var(--ink);background:var(--surface-2)}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chprog-track{height:3px;background:var(--line);overflow:hidden}
+.chprog{height:100%;width:10%;background:var(--accent);transition:width var(--dur) var(--ease)}
+
+/* only the active chapter is in view; everything else stays in the DOM */
+main>section[id],main>.hero{display:none}
+main>section[id].show,main>.hero.show{display:block}
+
+.pager{display:flex;gap:14px;align-items:center;max-width:1180px;margin:0 auto;
+  padding:clamp(26px,2.6vw,42px) clamp(20px,4vw,40px) clamp(48px,5vw,78px);border-top:2px dashed var(--line)}
+.pnav{display:flex;flex-direction:column;gap:3px;text-align:left;padding:13px 18px;border-radius:var(--r);
+  border:2px solid var(--line);background:var(--surface);font:inherit;color:inherit;cursor:pointer;max-width:44%;
+  transition:transform var(--dur) var(--ease),border-color var(--dur),box-shadow var(--dur)}
+.pnav:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow)}
+.pnav small{font-size:.66rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--faint)}
+.pnav b{font-size:.95rem;font-weight:800;letter-spacing:-.02em}
+.pnav.next{text-align:right;margin-left:auto;align-items:flex-end}
+.pcount{font-size:.76rem;font-weight:700;color:var(--faint);font-variant-numeric:tabular-nums;margin:0 auto;flex:0 0 auto}
+@media(max-width:560px){.pnav b{font-size:.85rem}.pager{gap:8px;padding-left:20px;padding-right:20px}.pcount{display:none}}
+
+/* ============================================================
+   FOLDING CARDS — headline first, body on demand
+   ============================================================ */
+.fold{--c:var(--accent)}
+.fold-top{display:flex;gap:13px;align-items:flex-start;width:100%;text-align:left;font:inherit;color:inherit;
+  background:none;border:none;padding:0;cursor:pointer}
+.fold-top>div{flex:1 1 auto;min-width:0}
+.fold .caret{flex:0 0 auto;width:26px;height:26px;border-radius:9px;display:grid;place-items:center;
+  background:color-mix(in srgb,var(--c) 15%,var(--surface-2));color:var(--c);font-weight:800;font-size:1.05rem;line-height:1;
+  transition:transform var(--dur) var(--ease)}
+.fold.open .caret{transform:rotate(45deg)}
+.fold-body{display:none;margin-top:14px;padding-top:14px;border-top:2px dashed var(--line)}
+.fold.open .fold-body{display:block;animation:pop .28s var(--ease)}
+.fold-top:hover .caret{background:color-mix(in srgb,var(--c) 28%,var(--surface-2))}
+.foldbar{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-top:20px}
+.foldbar .hint{font-size:.78rem;color:var(--faint)}
 </style>
 </head>
 <body>
@@ -537,16 +605,14 @@ table.tt{width:100%;border-collapse:collapse;font-size:.84rem}
       </svg>
       Lab Day
     </span>
-    <nav class="chips" id="chips">
-      <a href="#what">What we do</a><a href="#safety">Biosafety</a><a href="#journey">The journey</a><a href="#benches">Benches</a>
-      <a href="#methods">How we test</a><a href="#algos">Algorithms</a><a href="#watch">Watch it work</a><a href="#gallery">Through the scope</a><a href="#report">The report</a><a href="#cards">Flashcards</a><a href="#game">Which bench?</a><a href="#quiz">Quiz</a><a href="#glossary">Glossary</a><a href="#recap">Recap</a>
-    </nav>
+    <nav class="tabs" id="tabs" role="tablist" aria-label="Chapters"></nav>
     <button class="tbtn" id="theme" aria-label="Toggle dark mode"><span class="sun">☀</span><span class="moon">☾</span></button>
   </div>
+  <div class="chprog-track"><div class="chprog" id="chprog"></div></div>
 </div>
 
 <main>
-  <div class="wrap hero">
+  <div class="wrap hero" id="hero">
     <svg class="petri" viewBox="0 0 120 120" aria-hidden="true">
       <circle cx="60" cy="60" r="52" fill="none" stroke="currentColor" stroke-width="2" opacity=".22"/>
       <circle cx="60" cy="60" r="46" fill="currentColor" opacity=".05"/>
@@ -579,7 +645,8 @@ table.tt{width:100%;border-collapse:collapse;font-size:.84rem}
     <span class="eyebrow">02 &middot; Before you touch anything</span>
     <h2 class="sec">Biosafety, in five minutes.</h2>
     <p class="sec-sub">Read this bit properly. Most of the lab is routine, but a few organisms genuinely bite &mdash; and the bench clue that should stop you is not obvious.</p>
-    <div class="grid g2" id="bslGrid" style="margin-top:26px;align-items:start"></div>
+    <div class="grid" id="bslGrid" style="margin-top:26px;gap:12px"></div>
+    <div class="foldbar"><button class="btn ghost" id="bslAll">Open all four levels</button><span class="hint">Or open just the one you need.</span></div>
     <div class="danger" style="margin-top:16px">
       <h3>Stop-work organisms</h3>
       <p class="sec-sub" style="margin-top:4px">These are the leading causes of laboratory-acquired infection. If anything below fits, close the plate and find a supervisor &mdash; do not keep working it on the open bench.</p>
@@ -729,7 +796,7 @@ table.tt{width:100%;border-collapse:collapse;font-size:.84rem}
     <span class="eyebrow">09 &middot; Reading it back</span>
     <h2 class="sec">What the report actually says.</h2>
     <p class="sec-sub">A micro report evolves over days, and half its sentences are lab dialect. Here is how to read each stage &mdash; and the phrases people misread most.</p>
-    <div class="grid g2" id="stageGrid" style="margin-top:26px;align-items:start"></div>
+    <div class="grid" id="stageGrid" style="margin-top:26px;gap:12px"></div>
     <h3 class="sec" style="font-size:1.05rem;margin-top:22px">The four interpretive categories</h3>
     <div class="sirgrid" id="sirGrid"></div>
     <h3 class="sec" style="font-size:1.05rem;margin-top:22px">Lab dialect, translated</h3>
@@ -757,8 +824,14 @@ table.tt{width:100%;border-collapse:collapse;font-size:.84rem}
   <section id="quiz" class="wrap">
     <span class="eyebrow">12 &middot; Checkpoint</span>
     <h2 class="sec">Twelve quick questions.</h2>
-    <p class="sec-sub">Instant feedback and a pearl on every one. Nothing is recorded — this is just for you.</p>
-    <div id="quizList" style="margin-top:16px"></div>
+    <p class="sec-sub">One at a time, with instant feedback and a pearl on every one. Nothing is recorded — this is just for you.</p>
+    <div class="qbar" style="margin-top:24px">
+      <span class="qstep" id="qstep"></span>
+      <div class="qpips" id="qpips" role="group" aria-label="Jump to question"></div>
+    </div>
+    <div id="quizList"></div>
+    <div class="qnav" id="qnav"></div>
+    <div class="qdone" id="qdone"></div>
     <div class="score" id="score">Score <span id="sc">0</span> / <span id="sa">0</span></div>
   </section>
 
@@ -788,6 +861,8 @@ table.tt{width:100%;border-collapse:collapse;font-size:.84rem}
     <div class="closing"><p id="closeTxt"></p></div>
   </section>
 </main>
+
+<nav class="pager" id="pager" aria-label="Chapter navigation"></nav>
 
 <footer>
   <div class="wrap">
@@ -940,13 +1015,59 @@ function renderGame(){
   });
 }
 
-/* ---------- quiz ---------- */
-let qScore=0,qAns=0;
+/* ---------- quiz: one question at a time ---------- */
+let qScore=0,qAns=0,qCur=0,qState=[];
+function qCount(){ return (DATA.quiz||[]).length; }
+function qPips(){
+  $('#qpips').innerHTML=(DATA.quiz||[]).map((_,i)=>
+    `<button class="qpip${i===qCur?' on':''}${qState[i]===1?' ok':qState[i]===0?' no':''}" data-i="${i}"
+       aria-label="Question ${i+1}${qState[i]===undefined?', not answered':qState[i]===1?', correct':', incorrect'}"></button>`).join('');
+  $$('#qpips .qpip').forEach(p=>p.onclick=()=>qGo(+p.dataset.i));
+  $('#qstep').textContent=`Question ${qCur+1} of ${qCount()}`;
+}
+function qNav(){
+  const n=qCount(), last=qCur===n-1, cards=$$('#quizList .q');
+  const answered=cards[qCur]&&cards[qCur].dataset.done==='1';
+  $('#qnav').innerHTML=
+    (qCur>0?`<button class="btn ghost" data-go="${qCur-1}">&larr; Previous</button>`:'')+
+    (!last?`<button class="btn${answered?'':' ghost'}" data-go="${qCur+1}">Next question &rarr;</button>`:'')+
+    (qAns>=n?`<button class="btn ghost" id="qreview">Review all ${n}</button>`:'')+
+    (qAns>0?`<button class="btn ghost" id="qreset">Start over</button>`:'');
+  $$('#qnav [data-go]').forEach(b=>b.onclick=()=>qGo(+b.dataset.go));
+  const rv=$('#qreview');
+  if(rv) rv.onclick=()=>{
+    const list=$('#quizList'), on=list.classList.toggle('review');
+    if(on) $$('#quizList .q').forEach(c=>c.classList.remove('on')); else qGo(qCur);
+    rv.textContent=on?'Back to one at a time':`Review all ${n}`;
+  };
+  const rs=$('#qreset');
+  if(rs) rs.onclick=()=>{qScore=0;qAns=0;qCur=0;qState=[];renderQuiz();};
+}
+function qGo(i){
+  const n=qCount(); qCur=Math.max(0,Math.min(n-1,i));
+  const list=$('#quizList');
+  list.classList.remove('review');
+  $$('#quizList .q').forEach((c,j)=>c.classList.toggle('on',j===qCur));
+  qPips(); qNav();
+}
+function qFinish(){
+  const n=qCount(); if(qAns<n) { $('#qdone').classList.remove('show'); return; }
+  const pct=Math.round(qScore/n*100);
+  const line=pct===100?'Every one. Go and ask the bench something hard.'
+    :pct>=75?'Solid. You will keep up on the bench today.'
+    :pct>=50?'A fair start — the ones you missed are the ones worth re-reading.'
+    :'Worth another pass through the chapters before you go down.';
+  $('#qdone').innerHTML=`<div class="big">${qScore} / ${n}</div><p>${esc(line)} Use <b>Review all</b> to read every explanation and pearl in one go.</p>`;
+  $('#qdone').classList.add('show');
+}
 function renderQuiz(){
   const qs=DATA.quiz||[];
   $('#sa').textContent=qs.length;
+  $('#sc').textContent=qScore;
+  $('#qdone').classList.remove('show');
+  $('#quizList').classList.remove('review');
   $('#quizList').innerHTML=qs.map((q,i)=>`
-    <article class="q" data-i="${i}">
+    <article class="q${i===qCur?' on':''}" data-i="${i}">
       <div class="qn">Q${i+1}</div><p class="qs">${esc(q.stem)}</p>
       <div class="qo">${q.opts.map((o,j)=>`<button class="opt" data-j="${j}"><span class="key">${KEYS[j]}</span><span>${esc(o)}</span></button>`).join('')}</div>
       <div class="qex"></div>
@@ -956,7 +1077,7 @@ function renderQuiz(){
     $$('.opt',card).forEach(b=>b.onclick=()=>{
       if(card.dataset.done)return; card.dataset.done='1';
       const pick=+b.dataset.j, ok=pick===q.answer;
-      if(ok)qScore++; qAns++;
+      if(ok)qScore++; qAns++; qState[i]=ok?1:0;
       $$('.opt',card).forEach((x,j)=>{x.disabled=true;
         if(j===q.answer)x.classList.add('right'); else if(j===pick)x.classList.add('wrong');});
       const ex=$('.qex',card);
@@ -965,8 +1086,10 @@ function renderQuiz(){
         <div class="p"><b>Pearl:</b> ${esc(q.pearl)}</div>`;
       ex.classList.add('show');
       $('#sc').textContent=qScore;
+      qPips(); qNav(); qFinish();
     });
   });
+  qPips(); qNav();
 }
 
 
@@ -1080,18 +1203,48 @@ function renderGallery(){
 }
 
 
+/* ---------- folding cards ---------- */
+function wireFolds(sel){
+  $$(sel+' .fold').forEach(card=>{
+    const btn=card.querySelector('.fold-top');
+    if(!btn) return;
+    btn.onclick=()=>{
+      const open=card.classList.toggle('open');
+      btn.setAttribute('aria-expanded',String(open));
+    };
+  });
+}
 /* ---------- biosafety ---------- */
 const BSLC=['parasitology','virology','mycology','bacteriology'];
+function wireExpandAll(btnSel,gridSel,openTxt,shutTxt){
+  const b=$(btnSel); if(!b) return;
+  b.onclick=()=>{
+    const cards=$$(gridSel+' .fold');
+    const anyShut=cards.some(c=>!c.classList.contains('open'));
+    cards.forEach(c=>{
+      c.classList.toggle('open',anyShut);
+      const t=c.querySelector('.fold-top'); if(t) t.setAttribute('aria-expanded',String(anyShut));
+    });
+    b.textContent=anyShut?shutTxt:openTxt;
+  };
+}
 function renderSafety(){
   $('#bslGrid').innerHTML=(SAFETY.levels||[]).map((l,i)=>`
-    <article class="bsl" style="--c:var(--${BSLC[i]||'accent'})">
-      <div class="lv">${esc(l.name)}</div><h4>${esc(l.summary)}</h4>
-      <div class="work">${esc(l.work)}</div>
-      <div class="mini-h" style="--c:var(--${BSLC[i]||'accent'})">Seen here</div>
-      <div class="pills">${(l.examples||[]).map(e=>`<span class="pill">${esc(e)}</span>`).join('')}</div>
-      <div class="mini-h" style="--c:var(--${BSLC[i]||'accent'})">Practices</div>
-      <ul class="blist" style="--c:var(--${BSLC[i]||'accent'})">${(l.practices||[]).map(p=>`<li>${esc(p)}</li>`).join('')}</ul>
+    <article class="bsl fold${i===1?' open':''}" style="--c:var(--${BSLC[i]||'accent'})">
+      <button class="fold-top" aria-expanded="${i===1}">
+        <div><div class="lv">${esc(l.name)}</div><h4>${esc(l.summary)}</h4></div>
+        <span class="caret" aria-hidden="true">+</span>
+      </button>
+      <div class="fold-body">
+        <div class="work">${esc(l.work)}</div>
+        <div class="mini-h" style="--c:var(--${BSLC[i]||'accent'})">Seen here</div>
+        <div class="pills">${(l.examples||[]).map(e=>`<span class="pill">${esc(e)}</span>`).join('')}</div>
+        <div class="mini-h" style="--c:var(--${BSLC[i]||'accent'})">Practices</div>
+        <ul class="blist" style="--c:var(--${BSLC[i]||'accent'})">${(l.practices||[]).map(p=>`<li>${esc(p)}</li>`).join('')}</ul>
+      </div>
     </article>`).join('');
+  wireFolds('#bslGrid');
+  wireExpandAll('#bslAll','#bslGrid','Open all four levels','Collapse all four levels');
   $('#sentinelList').innerHTML=(SAFETY.sentinel||[]).map(x=>
     `<div class="sentrow"><b>${esc(x.organism)}</b><span>${esc(x.clue)}</span><span class="act">${esc(x.action)}</span></div>`).join('');
   $('#ruleGrid').innerHTML=(SAFETY.rules||[]).map(r=>
@@ -1104,10 +1257,17 @@ function renderSafety(){
 const STC=['bacteriology','mycology','virology','molecular'];
 function renderReport(){
   $('#stageGrid').innerHTML=(REPORT.stages||[]).map((x,i)=>`
-    <article class="stage" style="--c:var(--${STC[i]||'accent'})">
-      <div class="when">${esc(x.when)}</div><h4>${esc(x.title)}</h4>
-      <p><b>Says:</b> ${esc(x.reports)}</p><p><b>Means:</b> ${esc(x.means)}</p>
-      <div class="trap"><b>Trap &mdash; </b>${esc(x.trap)}</div></article>`).join('');
+    <article class="stage fold${i===0?' open':''}" style="--c:var(--${STC[i]||'accent'})">
+      <button class="fold-top" aria-expanded="${i===0}">
+        <div><div class="when">${esc(x.when)}</div><h4>${esc(x.title)}</h4></div>
+        <span class="caret" aria-hidden="true">+</span>
+      </button>
+      <div class="fold-body">
+        <p><b>Says:</b> ${esc(x.reports)}</p><p><b>Means:</b> ${esc(x.means)}</p>
+        <div class="trap"><b>Trap &mdash; </b>${esc(x.trap)}</div>
+      </div>
+    </article>`).join('');
+  wireFolds('#stageGrid');
   const sc={S:'parasitology',I:'mycology',R:'bacteriology'};
   $('#sirGrid').innerHTML=(REPORT.sir||[]).map(x=>`
     <div class="sircard" style="--c:var(--${sc[x.code]||'molecular'})">
@@ -1155,16 +1315,80 @@ function renderStats(){
            ['Quiz questions',(DATA.quiz||[]).length],['Lab images',(IMAGES||[]).length],['Algorithms',(TREES||[]).length],['Glossary terms',(GLOSS||[]).length]];
   $('#stats').innerHTML=s.map(([k,v])=>`<div class="stat"><b>${v}</b><span>${k}</span></div>`).join('');
 }
-function spy(){
-  const secs=$$('main section[id]');
-  const io=new IntersectionObserver(es=>es.forEach(e=>{
-    if(e.isIntersecting)$$('#chips a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id));
-  }),{rootMargin:'-45% 0px -50% 0px'});
-  secs.forEach(s=>io.observe(s));
+/* ---------- chapters: show one at a time instead of a single long scroll ---------- */
+const CHAPTERS=[
+  {id:'welcome',    label:'Welcome',      secs:['hero','what']},
+  {id:'biosafety',  label:'Biosafety',    secs:['safety']},
+  {id:'journey',    label:'Journey',      secs:['journey','benches']},
+  {id:'testing',    label:'How we test',  secs:['methods']},
+  {id:'watch',      label:'Watch',        secs:['watch','gallery']},
+  {id:'algorithms', label:'Algorithms',   secs:['algos']},
+  {id:'report',     label:'Report',       secs:['report']},
+  {id:'practice',   label:'Practice',     secs:['cards','game','quiz']},
+  {id:'glossary',   label:'Glossary',     secs:['glossary']},
+  {id:'recap',      label:'Recap',        secs:['recap']}
+];
+let chIdx=0;
+const chapterOfSection=id=>CHAPTERS.findIndex(c=>c.secs.indexOf(id)>=0);
+
+function renderTabs(){
+  $('#tabs').innerHTML=CHAPTERS.map((c,i)=>
+    `<button role="tab" id="tab-${c.id}" aria-controls="${c.secs.join(' ')}" aria-selected="${i===0}" tabindex="${i===0?0:-1}" data-i="${i}">${esc(c.label)}</button>`).join('');
+  $$('#tabs button').forEach(b=>{
+    b.onclick=()=>showChapter(+b.dataset.i);
+    b.onkeydown=e=>{
+      const n=CHAPTERS.length; let t=null;
+      if(e.key==='ArrowRight') t=(+b.dataset.i+1)%n;
+      else if(e.key==='ArrowLeft') t=(+b.dataset.i-1+n)%n;
+      else if(e.key==='Home') t=0;
+      else if(e.key==='End') t=n-1;
+      if(t===null) return;
+      e.preventDefault(); showChapter(t);
+      const nb=$(`#tabs button[data-i="${t}"]`); if(nb) nb.focus();
+    };
+  });
+}
+function renderPager(){
+  const prev=CHAPTERS[chIdx-1], next=CHAPTERS[chIdx+1];
+  $('#pager').innerHTML=
+    (prev?`<button class="pnav prev" data-i="${chIdx-1}"><small>&larr; Previous</small><b>${esc(prev.label)}</b></button>`:'<span></span>')+
+    `<span class="pcount">${chIdx+1} of ${CHAPTERS.length}</span>`+
+    (next?`<button class="pnav next" data-i="${chIdx+1}"><small>Next &rarr;</small><b>${esc(next.label)}</b></button>`:'<span></span>');
+  $$('#pager .pnav').forEach(b=>b.onclick=()=>showChapter(+b.dataset.i));
+}
+function showChapter(i,opts){
+  opts=opts||{};
+  chIdx=Math.max(0,Math.min(CHAPTERS.length-1,i));
+  const live=CHAPTERS[chIdx].secs;
+  $$('main>section[id],main>.hero').forEach(el=>el.classList.toggle('show',live.indexOf(el.id)>=0));
+  $$('#tabs button').forEach((b,j)=>{b.setAttribute('aria-selected',String(j===chIdx));b.tabIndex=j===chIdx?0:-1;});
+  renderPager();
+  const bar=$('#chprog'); if(bar) bar.style.width=((chIdx+1)/CHAPTERS.length*100).toFixed(1)+'%';
+  const tab=$(`#tabs button[data-i="${chIdx}"]`);
+  if(tab&&tab.scrollIntoView) tab.scrollIntoView({block:'nearest',inline:'nearest'});
+  if(opts.hash!==false && location.hash.slice(1)!==CHAPTERS[chIdx].id)
+    history.replaceState(null,'','#'+CHAPTERS[chIdx].id);
+  if(opts.scroll!==false) window.scrollTo(0,0);
+}
+function initChapters(){
+  renderTabs();
+  const h=decodeURIComponent(location.hash.slice(1));
+  let i=CHAPTERS.findIndex(c=>c.id===h), jump=null;
+  if(i<0&&h){ const j=chapterOfSection(h); if(j>=0){i=j;jump=h;} }
+  showChapter(i<0?0:i,{scroll:!jump,hash:!jump});
+  if(jump){ const el=document.getElementById(jump); if(el) el.scrollIntoView(); }
+  window.addEventListener('hashchange',()=>{
+    const hh=decodeURIComponent(location.hash.slice(1));
+    const k=CHAPTERS.findIndex(c=>c.id===hh);
+    if(k>=0){ showChapter(k); return; }
+    const j=chapterOfSection(hh);
+    if(j>=0){ showChapter(j,{hash:false,scroll:false});
+      const el=document.getElementById(hh); if(el) el.scrollIntoView(); }
+  });
 }
 
 renderStats();renderDisciplines();renderJourney();renderBenches();renderFilters();renderMethods('all');
-renderSafety();renderReport();renderGlossTags();renderGloss();renderRecap();renderTreeChips();renderTree();renderCards();renderGallery();renderGame();renderQuiz();spy();
+renderSafety();renderReport();renderGlossTags();renderGloss();renderRecap();renderTreeChips();renderTree();renderCards();renderGallery();renderGame();renderQuiz();initChapters();
 </script>
 </body>
 </html>
