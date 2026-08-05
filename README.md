@@ -12,18 +12,20 @@ A **fun, compact, interactive** one-day orientation to the hospital clinical mic
 
 | Section | What it does |
 |---|---|
+| **Biosafety** | Biosafety levels 1–4, the non-negotiables, six stop-work sentinel organisms with their bench clues, PPE, exposure first aid and spill response |
 | **The map** | The seven sub-disciplines — bacteriology, virology, mycology, parasitology, mycobacteriology, serology, molecular — each expandable with specimens, methods, organisms, considerations and timing |
 | **The journey** | A clickable 7-step walk from specimen receipt through accessioning, adequacy, direct exam, plating, reading/identification, to susceptibility and reporting |
 | **The benches** | Urine, respiratory, blood, stool, wound and sterile-fluid benches — media set up, incubation, what the tech looks for, common isolates, and each bench's classic trap |
 | **The toolbox** | 14 test methods filterable by family: Gram stain, media, colony morphology, biochemicals, strip assays, disks, rapid antigen, MALDI-TOF, automated ID/AST, blood culture instruments, disk diffusion, broth microdilution, targeted PCR/GeneXpert, multiplex panels/BioFire |
-| **Follow the algorithm** | Five interactive identification decision trees you walk one answer at a time — gram-positive cocci (catalase → coagulase → hemolysis → optochin/bacitracin/bile esculin), gram-negative rods (oxidase → lactose), gram-positive rods, yeast, and a positive blood culture workflow. Each has a "show the whole tree" outline view |
+| **Follow the algorithm** | Twelve interactive decision trees (149 nodes) you walk one answer at a time — gram-positive cocci (catalase → coagulase → hemolysis → optochin/bacitracin/bile esculin), gram-negative rods (oxidase → lactose), gram-positive rods, yeast, and a positive blood culture workflow. Each has a "show the whole tree" outline view |
 | **Watch it work** | Six looping CSS/SVG animations: the four Gram stain steps, streaking for isolation, overnight colony growth, a blood culture flagging positive, disk-diffusion zones, and a PCR amplification curve |
 | **Through the scope** | 10 real freely-licensed stains, plates and bench results, each credited |
+| **Reading the report** | How a report evolves over four stages, the four interpretive categories (S / I / SDD / R), eight pieces of lab dialect translated, critical values, and a turnaround-time table |
 | **Flashcards** | 16 flip cards of the organisms worth recognizing by the end of the day |
 | **Which bench?** | A scored specimen-routing game |
 | **Checkpoint** | 12 quiz questions with instant feedback and a pearl on each |
 
-Light and dark themes, keyboard accessible, `prefers-reduced-motion` respected.
+Plus a searchable 64-term **glossary** and an end-of-day **recap**. Light and dark themes, keyboard accessible, `prefers-reduced-motion` respected.
 
 ## Run it locally
 
