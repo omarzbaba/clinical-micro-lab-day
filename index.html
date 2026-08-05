@@ -949,7 +949,7 @@ function treeCur(){ return (TREES||[])[tSel]; }
 function renderTreeChips(){
   $('#tchips').innerHTML=(TREES||[]).map((t,i)=>
     `<button class="tchip${i===tSel?' on':''}" style="--c:var(--${t.color||'accent'})" data-i="${i}"><i></i>${esc(t.name)}</button>`).join('');
-  $$('#tchips .tchip').forEach(c=>c.onclick=()=>{tSel=+c.dataset.i;tPath=[];tNode=null;tMap=false;renderSafety();renderReport();renderGlossTags();renderGloss();renderRecap();renderTreeChips();renderTree();});
+  $$('#tchips .tchip').forEach(c=>c.onclick=()=>{tSel=+c.dataset.i;tPath=[];tNode=null;tMap=false;renderTreeChips();renderTree();});
 }
 function mapHtml(t,id,depth){
   const n=t.nodes[id]; if(!n||depth>7) return '';
@@ -1106,7 +1106,7 @@ function spy(){
 }
 
 renderStats();renderDisciplines();renderJourney();renderBenches();renderFilters();renderMethods('all');
-renderTreeChips();renderTree();renderCards();renderGallery();renderGame();renderQuiz();spy();
+renderSafety();renderReport();renderGlossTags();renderGloss();renderRecap();renderTreeChips();renderTree();renderCards();renderGallery();renderGame();renderQuiz();spy();
 </script>
 </body>
 </html>
