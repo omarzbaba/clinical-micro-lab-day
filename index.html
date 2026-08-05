@@ -57,18 +57,18 @@ h1,h2,h3,h4{margin:0;line-height:1.12;letter-spacing:-.03em;font-weight:800}
 p{margin:0}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:6px}
-.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
-section{padding:44px 0;scroll-margin-top:64px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:clamp(20px,4vw,40px);padding-right:clamp(20px,4vw,40px)}
+section{padding:clamp(46px,4.6vw,74px) 0;scroll-margin-top:76px}
 .eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:.7rem;font-weight:800;text-transform:uppercase;
   letter-spacing:.12em;padding:5px 12px;border-radius:99px;background:var(--surface);border:2px solid var(--line-2)}
-h2.sec{font-size:clamp(1.5rem,1.1rem+1.6vw,2.1rem);margin:12px 0 6px}
-.sec-sub{color:var(--muted);max-width:62ch;font-size:.95rem}
+h2.sec{font-size:clamp(1.55rem,1.1rem+1.8vw,2.3rem);margin:16px 0 10px}
+.sec-sub{color:var(--muted);max-width:64ch;font-size:.97rem;line-height:1.62}
 
 /* ---------- top bar ---------- */
 .bar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 86%,transparent);
   backdrop-filter:blur(14px) saturate(1.6);border-bottom:2px solid var(--line)}
-.bar-in{max-width:1080px;margin:0 auto;padding:9px 20px;display:flex;align-items:center;gap:14px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.02em;font-size:.95rem}
+.bar-in{max-width:1180px;margin:0 auto;padding:10px clamp(20px,4vw,40px);display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.02em;font-size:.95rem;white-space:nowrap;flex:0 0 auto}
 .chips{display:flex;gap:5px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
 .chips::-webkit-scrollbar{display:none}
 .chips a{font-size:.76rem;font-weight:700;padding:6px 11px;border-radius:99px;text-decoration:none;color:var(--muted);white-space:nowrap;transition:all var(--dur)}
@@ -80,7 +80,7 @@ h2.sec{font-size:clamp(1.5rem,1.1rem+1.6vw,2.1rem);margin:12px 0 6px}
 html[data-theme="dark"] .moon{display:none} html[data-theme="light"] .sun{display:none}
 
 /* ---------- hero ---------- */
-.hero{padding:38px 0 26px}
+.hero{padding-top:clamp(40px,4vw,64px);padding-bottom:clamp(26px,2.6vw,40px)}
 .hero h1{font-size:clamp(2.1rem,1.3rem+3.6vw,3.5rem);letter-spacing:-.045em;margin:14px 0 12px}
 .hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--bacteriology),var(--mycology) 40%,var(--virology) 75%,var(--molecular));
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
@@ -93,15 +93,15 @@ html[data-theme="dark"] .moon{display:none} html[data-theme="light"] .sun{displa
 .avs span:nth-child(1){background:var(--bacteriology)} .avs span:nth-child(2){background:var(--virology);margin-left:-12px}
 .namecard div{line-height:1.2}
 .namecard strong{font-size:.9rem} .namecard small{color:var(--faint);font-size:.74rem;display:block}
-.stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
-.stat{padding:10px 15px;border-radius:14px;background:var(--surface);border:2px solid var(--line);min-width:96px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(122px,1fr));gap:12px;margin-top:28px}
+.stat{padding:12px 15px;border-radius:14px;background:var(--surface);border:2px solid var(--line)}
 .stat b{display:block;font-size:1.45rem;font-weight:800;letter-spacing:-.04em}
 .stat span{font-size:.68rem;text-transform:uppercase;letter-spacing:.09em;color:var(--faint);font-weight:700}
 
 /* ---------- generic card grid ---------- */
-.grid{display:grid;gap:14px}
+.grid{display:grid;gap:clamp(16px,1.8vw,24px)}
 .g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)}
-.card{background:var(--surface);border:2px solid var(--line);border-radius:var(--r);padding:16px;box-shadow:var(--shadow)}
+.card{background:var(--surface);border:2px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:var(--shadow)}
 
 /* ---------- discipline cards ---------- */
 .disc{--c:var(--accent);position:relative;background:var(--surface);border:2px solid var(--line);border-radius:var(--r);
@@ -155,8 +155,8 @@ html[data-theme="dark"] .moon{display:none} html[data-theme="light"] .sun{displa
   background:color-mix(in srgb,var(--c) 13%,var(--surface));border:2px solid color-mix(in srgb,var(--c) 32%,transparent);border-bottom:none}
 .bhead h3{font-size:1.15rem}
 .bhead p{font-size:.87rem;color:var(--muted);margin-top:3px}
-.bbody{border:2px solid var(--line);border-top:none;border-radius:0 0 var(--r) var(--r);background:var(--surface);padding:16px;
-  display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.bbody{border:2px solid var(--line);border-top:none;border-radius:0 0 var(--r) var(--r);background:var(--surface);padding:22px;
+  display:grid;grid-template-columns:1fr 1fr;gap:24px}
 .bcol h5{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);font-weight:800;margin-bottom:6px}
 .blist{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:5px}
 .blist li{font-size:.85rem;color:var(--muted);padding-left:16px;position:relative}
@@ -183,7 +183,7 @@ html[data-theme="dark"] .moon{display:none} html[data-theme="light"] .sun{displa
 .mcatch b{color:var(--ink);font-weight:800}
 
 /* ---------- flashcards ---------- */
-.fgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.fgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:17px}
 .flip{perspective:1000px;height:158px;cursor:pointer;background:none;border:none;padding:0;font:inherit;color:inherit}
 .flip-in{position:relative;width:100%;height:100%;transition:transform .55s var(--ease);transform-style:preserve-3d}
 .flip.on .flip-in{transform:rotateY(180deg)}
@@ -222,7 +222,7 @@ html[data-theme="dark"] .moon{display:none} html[data-theme="light"] .sun{displa
 .btn.ghost{background:transparent;color:var(--ink)}
 
 /* ---------- quiz ---------- */
-.q{background:var(--surface);border:2px solid var(--line);border-radius:var(--r);padding:16px 18px;margin-bottom:12px;box-shadow:var(--shadow)}
+.q{background:var(--surface);border:2px solid var(--line);border-radius:var(--r);padding:21px 23px;margin-bottom:17px;box-shadow:var(--shadow)}
 .qn{font-family:var(--mono);font-size:.72rem;font-weight:700;color:var(--faint)}
 .qs{font-size:.95rem;font-weight:650;margin:5px 0 12px;letter-spacing:-.01em}
 .qo{display:flex;flex-direction:column;gap:7px}
@@ -263,7 +263,7 @@ footer p{font-size:.83rem;color:var(--muted);margin-bottom:8px}
 /* ============================================================
    ANIMATED EXPLAINERS + IMAGE GALLERY
    ============================================================ */
-.anim-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.anim-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .anim{--c:var(--accent);background:var(--surface);border:2px solid var(--line);border-left:6px solid var(--c);
   border-radius:var(--r);padding:14px;box-shadow:var(--shadow)}
 .anim h4{font-size:.95rem;letter-spacing:-.02em}
@@ -335,7 +335,7 @@ footer p{font-size:.83rem;color:var(--muted);margin-bottom:8px}
 @keyframes ctpop{0%,42%{opacity:0}52%,92%{opacity:1}100%{opacity:0}}
 
 /* image gallery */
-.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .shot{margin:0;background:var(--surface);border:2px solid var(--line);border-radius:var(--r);overflow:hidden;
   box-shadow:var(--shadow);transition:transform var(--dur) var(--ease),box-shadow var(--dur)}
 .shot:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
@@ -361,74 +361,102 @@ footer p{font-size:.83rem;color:var(--muted);margin-bottom:8px}
 }
 
 /* ============================================================
-   IDENTIFICATION ALGORITHMS (walk-the-tree)
+   IDENTIFICATION ALGORITHMS (branching tree)
    ============================================================ */
-.tchips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
-.tchip{--c:var(--accent);display:flex;align-items:center;gap:7px;padding:8px 14px;border-radius:99px;border:2px solid var(--line);
+.tchips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.tchip{--c:var(--accent);display:flex;align-items:center;gap:8px;padding:9px 16px;border-radius:99px;border:2px solid var(--line);
   background:var(--surface);font:inherit;font-size:.83rem;font-weight:700;color:var(--muted);cursor:pointer;transition:all var(--dur)}
 .tchip:hover{color:var(--ink);border-color:var(--c)}
 .tchip.on{background:var(--c);border-color:var(--c);color:#fff}
 .tchip i{width:9px;height:9px;border-radius:50%;background:var(--c);display:block}
 .tchip.on i{background:#fff}
 
-.tree{--c:var(--accent);background:var(--surface);border:2px solid var(--line);border-left:6px solid var(--c);
-  border-radius:var(--r);padding:18px;box-shadow:var(--shadow)}
-.tree-note{font-size:.83rem;color:var(--muted);margin-bottom:12px;padding-bottom:12px;border-bottom:2px dashed var(--line)}
-.trail{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:12px;font-size:.75rem}
-.crumb{padding:4px 10px;border-radius:99px;background:var(--surface-2);border:1.5px solid var(--line);font-weight:700;color:var(--muted)}
+.tree{--c:var(--accent);--tw:172px;--tgap:44px;--tsep:20px;--tline:var(--line-2);
+  background:var(--surface);border:2px solid var(--line);border-left:6px solid var(--c);
+  border-radius:var(--r);padding:24px;box-shadow:var(--shadow)}
+.tree-note{font-size:.85rem;color:var(--muted);line-height:1.6;max-width:80ch;margin-bottom:16px;padding-bottom:16px;border-bottom:2px dashed var(--line)}
+.tlegend{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-bottom:18px;font-size:.75rem;color:var(--muted);font-weight:650}
+.tlegend span{display:inline-flex;align-items:center;gap:7px}
+.tlegend i{width:15px;height:15px;border-radius:5px;border:2px solid var(--line);background:var(--surface);display:block}
+.tlegend i.lr{border-color:color-mix(in srgb,var(--c) 45%,transparent);background:color-mix(in srgb,var(--c) 20%,var(--surface))}
+
+/* the canvas scrolls sideways on narrow screens; the page never does */
+.tscroll{overflow-x:auto;overflow-y:hidden;padding:4px 2px 14px;scrollbar-width:thin;display:flex;justify-content:safe center}
+.tcanvas{flex:0 0 auto}
+
+/* a node is its own box sitting beside the column of its children */
+.tn{display:flex;align-items:center}
+.tbox{flex:0 0 var(--tw);width:var(--tw);display:block;text-align:left;font:inherit;color:inherit;cursor:pointer;padding:0;
+  background:var(--surface);border:2px solid var(--line);border-radius:var(--r-sm);overflow:hidden;box-shadow:var(--shadow);
+  transition:transform var(--dur) var(--ease),border-color var(--dur),box-shadow var(--dur),opacity var(--dur)}
+.tbox:hover{border-color:var(--c);transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.tans{display:block;padding:6px 11px;font-size:.71rem;font-weight:750;line-height:1.32;
+  background:color-mix(in srgb,var(--c) 14%,var(--surface-2));border-bottom:1.5px solid var(--line);color:var(--ink)}
+.tttl{display:block;padding:10px 11px;font-size:.8rem;font-weight:750;line-height:1.3}
+.tbox.is-r{border-color:color-mix(in srgb,var(--c) 42%,transparent);background:color-mix(in srgb,var(--c) 9%,var(--surface))}
+.tbox.is-r .tttl{font-style:italic;font-weight:800;padding-bottom:4px}
+.ttag{display:inline-block;margin:0 11px 10px;font-size:.58rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  padding:2px 8px;border-radius:99px;background:var(--c);color:#fff}
+.tbox.sel{border-color:var(--c);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 32%,transparent),var(--shadow-lg)}
+
+/* elbow connectors: one vertical spine per sibling group, one stub per child */
+.tkids{display:flex;flex-direction:column;gap:var(--tsep);position:relative;padding-left:var(--tgap)}
+.tkids::before{content:'';position:absolute;left:0;top:50%;width:calc(var(--tgap)/2);border-top:2px solid var(--tline)}
+/* separation lives in the gap, not in per-level padding, so it cannot compound with depth */
+.tbr{position:relative}
+.tbr::before{content:'';position:absolute;left:calc(var(--tgap)/-2);top:calc(var(--tsep)/-2);bottom:calc(var(--tsep)/-2);border-left:2px solid var(--tline)}
+.tbr:first-child::before{top:50%}
+.tbr:last-child::before{bottom:50%}
+.tbr:only-child::before{display:none}
+.tbr::after{content:'';position:absolute;left:calc(var(--tgap)/-2);top:50%;width:calc(var(--tgap)/2);border-top:2px solid var(--tline)}
+.tbr:only-child::after{left:calc(var(--tgap)*-1);width:var(--tgap)}
+
+/* clicking a box lights the route back to the start */
+.tkids.lit::before,.tbr.lit::before,.tbr.lit::after{border-color:var(--c)}
+.tcanvas.has-sel .tbox{opacity:.4}
+.tcanvas.has-sel .tbox.lit{opacity:1}
+
+.tdetail{margin-top:6px;border-radius:var(--r-sm);padding:18px 20px;background:var(--surface-2);
+  border:2px solid var(--line);border-left:5px solid var(--c);max-width:82ch}
+.tdetail.empty{color:var(--muted);font-size:.86rem;border-left-color:var(--line);line-height:1.6}
+.trail{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-bottom:12px;font-size:.72rem}
+.crumb{padding:4px 11px;border-radius:99px;background:var(--surface);border:1.5px solid var(--line);font-weight:700;color:var(--muted)}
 .crumb.start{background:color-mix(in srgb,var(--c) 14%,transparent);border-color:color-mix(in srgb,var(--c) 34%,transparent);color:var(--ink)}
 .trail .arw{color:var(--faint);font-weight:800}
-
-.tnode h4{font-size:1.12rem;letter-spacing:-.025em}
-.thint{font-size:.85rem;color:var(--muted);margin-top:5px}
-.topts{display:flex;flex-direction:column;gap:8px;margin-top:13px}
-.topt{--c:var(--accent);display:flex;gap:11px;align-items:flex-start;text-align:left;padding:12px 14px;border-radius:var(--r-sm);
-  border:2px solid var(--line);background:var(--surface-2);font:inherit;font-size:.9rem;color:var(--ink);cursor:pointer;
-  transition:all var(--dur) var(--ease)}
-.topt:hover{border-color:var(--c);transform:translateX(3px);background:color-mix(in srgb,var(--c) 8%,var(--surface-2))}
-.topt b{font-weight:800;letter-spacing:-.01em}
-.topt small{display:block;color:var(--muted);font-size:.79rem;margin-top:2px;font-weight:500}
-.topt .go{margin-left:auto;color:var(--c);font-weight:800;align-self:center}
-
-.tresult{--c:var(--parasitology);border-radius:var(--r-sm);padding:16px;background:color-mix(in srgb,var(--c) 11%,var(--surface));
-  border:2px solid color-mix(in srgb,var(--c) 34%,transparent);animation:pop .35s var(--ease)}
-.tresult .tag{display:inline-block;font-size:.63rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
-  padding:3px 9px;border-radius:99px;background:var(--c);color:#fff;margin-bottom:7px}
-.tresult h4{font-size:1.25rem;font-style:italic;letter-spacing:-.03em}
-.tresult .why{font-size:.87rem;color:var(--muted);margin-top:7px}
-.tresult .next{margin-top:11px;padding:11px 13px;border-radius:var(--r-sm);background:var(--surface);border-left:4px solid var(--c);font-size:.86rem}
-.tresult .next b{font-weight:800}
-.tbar{display:flex;gap:9px;margin-top:14px;flex-wrap:wrap}
-
-.tmap{margin-top:14px;display:none}
-.tmap.on{display:block;animation:pop .3s var(--ease)}
-.tmap ul{list-style:none;margin:0;padding-left:18px;border-left:2px dashed var(--line)}
-.tmap>ul{padding-left:0;border-left:none}
-.tmap li{margin:5px 0;font-size:.84rem}
-.tmap .q{font-weight:800;color:var(--ink)}
-.tmap .a{color:var(--muted)}
-.tmap .r{font-style:italic;font-weight:700;color:var(--c)}
+.tdetail h4{font-size:1.14rem;letter-spacing:-.025em}
+.tdetail h4.res{font-style:italic;font-size:1.26rem}
+.tdetail .tag{display:inline-block;font-size:.62rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+  padding:3px 10px;border-radius:99px;background:var(--c);color:#fff;margin-bottom:8px}
+.thint{font-size:.88rem;color:var(--muted);margin-top:8px;line-height:1.62}
+.tnwhy{font-size:.85rem;margin-bottom:11px;padding:10px 13px;border-radius:var(--r-sm);
+  background:var(--surface);border-left:4px solid var(--tline);color:var(--muted);line-height:1.55}
+.tnext{margin-top:13px;padding:12px 15px;border-radius:var(--r-sm);background:var(--surface);
+  border-left:4px solid var(--c);font-size:.87rem;line-height:1.6}
+.tnext b{font-weight:800}
+.tbar{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;align-items:center}
+.thowto{font-size:.78rem;color:var(--faint)}
+@media(max-width:760px){.tree{--tw:148px;--tgap:32px;--tsep:15px;padding:18px}}
 
 /* ============================================================
    BIOSAFETY / REPORT / GLOSSARY / RECAP
    ============================================================ */
 .bsl{--c:var(--accent);background:var(--surface);border:2px solid var(--line);border-top:6px solid var(--c);
-  border-radius:var(--r);padding:15px;box-shadow:var(--shadow)}
+  border-radius:var(--r);padding:20px;box-shadow:var(--shadow)}
 .bsl .lv{font-family:var(--mono);font-size:.72rem;font-weight:800;color:var(--c);letter-spacing:.06em}
 .bsl h4{font-size:1rem;margin-top:2px}
-.bsl .sum{font-size:.85rem;color:var(--muted);margin-top:5px}
-.bsl .work{font-size:.82rem;margin-top:8px;padding:8px 10px;border-radius:var(--r-sm);background:var(--surface-2)}
+.bsl .sum{font-size:.87rem;color:var(--muted);margin-top:7px;line-height:1.6}
+.bsl .work{font-size:.84rem;margin-top:12px;padding:11px 13px;border-radius:var(--r-sm);background:var(--surface-2);line-height:1.55}
 
 .danger{background:color-mix(in srgb,var(--bacteriology) 10%,var(--surface));
   border:2px solid color-mix(in srgb,var(--bacteriology) 40%,transparent);border-radius:var(--r);padding:16px}
 .danger h3{font-size:1.05rem;color:var(--bacteriology)}
-.sent{display:grid;grid-template-columns:1fr;gap:9px;margin-top:12px}
-.sentrow{display:grid;grid-template-columns:minmax(130px,.8fr) 1.4fr 1.4fr;gap:12px;padding:10px 12px;border-radius:var(--r-sm);
+.sent{display:grid;grid-template-columns:1fr;gap:11px;margin-top:18px}
+.sentrow{display:grid;grid-template-columns:minmax(150px,.8fr) 1.4fr 1.4fr;gap:16px;padding:14px 16px;border-radius:var(--r-sm);
   background:var(--surface);border:1.5px solid var(--line);font-size:.84rem}
 .sentrow b{font-style:italic;font-weight:800}
 .sentrow .act{color:var(--bacteriology);font-weight:650}
-.rules{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:12px}
-.rule{display:flex;gap:10px;padding:11px 13px;border-radius:var(--r-sm);background:var(--surface);border:1.5px solid var(--line);font-size:.85rem}
+.rules{display:grid;grid-template-columns:repeat(2,1fr);gap:13px;margin-top:18px}
+.rule{display:flex;gap:11px;padding:14px 16px;border-radius:var(--r-sm);background:var(--surface);border:1.5px solid var(--line);font-size:.85rem;line-height:1.5}
 .rule .x{color:var(--bacteriology);font-weight:800;flex:0 0 auto}
 .rule small{display:block;color:var(--muted);font-size:.78rem;margin-top:2px}
 .steps{counter-reset:st;list-style:none;padding:0;margin:12px 0 0;display:flex;flex-direction:column;gap:8px}
@@ -438,14 +466,14 @@ footer p{font-size:.83rem;color:var(--muted);margin-bottom:8px}
   background:var(--bacteriology);color:#fff;font:800 .74rem var(--mono);display:grid;place-items:center}
 
 .stage{--c:var(--accent);background:var(--surface);border:2px solid var(--line);border-left:6px solid var(--c);
-  border-radius:var(--r-sm);padding:14px}
+  border-radius:var(--r-sm);padding:19px}
 .stage .when{font-family:var(--mono);font-size:.7rem;font-weight:700;color:var(--c);letter-spacing:.05em}
 .stage h4{font-size:.96rem;margin-top:3px}
-.stage p{font-size:.84rem;color:var(--muted);margin-top:6px}
+.stage p{font-size:.86rem;color:var(--muted);margin-top:8px;line-height:1.6}
 .stage .trap{margin-top:9px;font-size:.82rem;padding:8px 11px;border-radius:8px;
   background:color-mix(in srgb,var(--bacteriology) 9%,transparent);border-left:3px solid var(--bacteriology)}
 
-.sirgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}
+.sirgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .sircard{--c:var(--accent);text-align:center;padding:14px 12px;border-radius:var(--r);background:var(--surface);
   border:2px solid var(--line);border-top:5px solid var(--c)}
 .sircard .code{font:800 1.6rem/1 var(--font);color:var(--c);letter-spacing:-.04em}
@@ -466,13 +494,13 @@ table.tt{width:100%;border-collapse:collapse;font-size:.84rem}
   border:2px solid var(--line);margin-bottom:12px}
 .gsearch input{flex:1;border:none;background:transparent;color:var(--ink);font:inherit;font-size:.92rem;outline:none}
 .gsearch input::placeholder{color:var(--faint)}
-.gterms{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.gterm{padding:12px 14px;border-radius:var(--r-sm);background:var(--surface);border:1.5px solid var(--line);
+.gterms{display:grid;grid-template-columns:repeat(auto-fit,minmax(295px,1fr));gap:15px}
+.gterm{padding:15px 17px;border-radius:var(--r-sm);background:var(--surface);border:1.5px solid var(--line);
   transition:transform var(--dur),border-color var(--dur)}
 .gterm:hover{transform:translateY(-2px);border-color:var(--accent)}
 .gterm .t{font-weight:800;font-size:.88rem;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
 .gterm .ab{font-family:var(--mono);font-size:.7rem;padding:1px 6px;border-radius:5px;background:var(--surface-2);border:1px solid var(--line);color:var(--muted)}
-.gterm .d{font-size:.82rem;color:var(--muted);margin-top:4px}
+.gterm .d{font-size:.83rem;color:var(--muted);margin-top:6px;line-height:1.58}
 .gterm .tg{font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--faint);margin-top:6px;display:block}
 .gempty{grid-column:1/-1;text-align:center;padding:34px;color:var(--faint)}
 
@@ -493,8 +521,8 @@ table.tt{width:100%;border-collapse:collapse;font-size:.84rem}
   border:2px solid var(--line)}
 .closing p{font-size:1.02rem;font-weight:650;max-width:56ch;margin:0 auto;letter-spacing:-.015em}
 
-@media(max-width:960px){.sirgrid{grid-template-columns:repeat(2,1fr)}.gterms{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:680px){.rules,.sirgrid,.gterms{grid-template-columns:1fr}.sentrow{grid-template-columns:1fr;gap:5px}}
+@media(max-width:960px){.sirgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:680px){.rules,.sirgrid{grid-template-columns:1fr}.sentrow{grid-template-columns:1fr;gap:6px}}
 </style>
 </head>
 <body>
@@ -551,7 +579,7 @@ table.tt{width:100%;border-collapse:collapse;font-size:.84rem}
     <span class="eyebrow">02 &middot; Before you touch anything</span>
     <h2 class="sec">Biosafety, in five minutes.</h2>
     <p class="sec-sub">Read this bit properly. Most of the lab is routine, but a few organisms genuinely bite &mdash; and the bench clue that should stop you is not obvious.</p>
-    <div class="grid g4" id="bslGrid" style="margin-top:16px"></div>
+    <div class="grid g2" id="bslGrid" style="margin-top:26px;align-items:start"></div>
     <div class="danger" style="margin-top:16px">
       <h3>Stop-work organisms</h3>
       <p class="sec-sub" style="margin-top:4px">These are the leading causes of laboratory-acquired infection. If anything below fits, close the plate and find a supervisor &mdash; do not keep working it on the open bench.</p>
@@ -595,8 +623,8 @@ table.tt{width:100%;border-collapse:collapse;font-size:.84rem}
   <section id="algos" class="wrap">
     <span class="eyebrow">06 &middot; Follow the algorithm</span>
     <h2 class="sec">You have a colony. Now what?</h2>
-    <p class="sec-sub">The classic bench decision trees. Pick a starting point and walk it &mdash; each answer takes you one step closer to a name.</p>
-    <div class="tchips" id="tchips" style="margin-top:16px"></div>
+    <p class="sec-sub">The classic bench decision trees, drawn out in full. Click any box to light up the route back to the start and read what that step actually tells you.</p>
+    <div class="tchips" id="tchips" style="margin-top:26px"></div>
     <div class="tree" id="treeBox"></div>
   </section>
 
@@ -701,7 +729,7 @@ table.tt{width:100%;border-collapse:collapse;font-size:.84rem}
     <span class="eyebrow">09 &middot; Reading it back</span>
     <h2 class="sec">What the report actually says.</h2>
     <p class="sec-sub">A micro report evolves over days, and half its sentences are lab dialect. Here is how to read each stage &mdash; and the phrases people misread most.</p>
-    <div class="grid g4" id="stageGrid" style="margin-top:16px"></div>
+    <div class="grid g2" id="stageGrid" style="margin-top:26px;align-items:start"></div>
     <h3 class="sec" style="font-size:1.05rem;margin-top:22px">The four interpretive categories</h3>
     <div class="sirgrid" id="sirGrid"></div>
     <h3 class="sec" style="font-size:1.05rem;margin-top:22px">Lab dialect, translated</h3>
@@ -943,57 +971,87 @@ function renderQuiz(){
 
 
 
-/* ---------- identification algorithms ---------- */
-let tSel=0, tPath=[], tNode=null, tMap=false;
+/* ---------- identification algorithms (branching tree) ---------- */
+let tSel=0;
 function treeCur(){ return (TREES||[])[tSel]; }
 function renderTreeChips(){
   $('#tchips').innerHTML=(TREES||[]).map((t,i)=>
     `<button class="tchip${i===tSel?' on':''}" style="--c:var(--${t.color||'accent'})" data-i="${i}"><i></i>${esc(t.name)}</button>`).join('');
-  $$('#tchips .tchip').forEach(c=>c.onclick=()=>{tSel=+c.dataset.i;tPath=[];tNode=null;tMap=false;renderTreeChips();renderTree();});
+  $$('#tchips .tchip').forEach(c=>c.onclick=()=>{tSel=+c.dataset.i;renderTreeChips();renderTree();});
 }
-function mapHtml(t,id,depth){
-  const n=t.nodes[id]; if(!n||depth>7) return '';
-  if(n.result) return `<li><span class="r">${esc(n.result)}</span></li>`;
-  return `<li><span class="q">${esc(n.test)}</span><ul>`+
-    (n.options||[]).map(o=>`<li><span class="a">${esc(o.label)}</span><ul>${mapHtml(t,o.go,depth+1)}</ul></li>`).join('')+
-    `</ul></li>`;
+/* one <div class="tn"> per node: its own box, then the column of its children */
+function tNodeHtml(t,id,ans,note,depth,seen){
+  const n=t.nodes[id];
+  if(!n||depth>9||seen.has(id))
+    return `<div class="tn"><button class="tbox" data-id="">${ans?`<span class="tans">${esc(ans)}</span>`:''}<span class="tttl">Not built out</span></button></div>`;
+  const s2=new Set(seen); s2.add(id);
+  const head=ans?`<span class="tans">${esc(ans)}</span>`:'';
+  const attrs=`data-id="${esc(id)}" data-ans="${esc(ans||'')}" data-note="${esc(note||'')}"`;
+  if(n.result)
+    return `<div class="tn"><button class="tbox is-r" ${attrs}>${head}<span class="tttl">${esc(n.result)}</span>`+
+           `${n.tag?`<span class="ttag">${esc(n.tag)}</span>`:''}</button></div>`;
+  const kids=(n.options||[]).map(o=>`<div class="tbr">${tNodeHtml(t,o.go,o.label,o.note,depth+1,s2)}</div>`).join('');
+  return `<div class="tn"><button class="tbox is-q" ${attrs}>${head}<span class="tttl">${esc(n.test)}</span></button>`+
+         `<div class="tkids">${kids}</div></div>`;
+}
+function tParentNode(tn){
+  const br=tn.parentElement;
+  return (br&&br.classList.contains('tbr'))?br:null;
+}
+function tClear(){
+  const c=$('#tcanvas'); if(!c) return;
+  c.classList.remove('has-sel');
+  $$('#tcanvas .lit').forEach(e=>e.classList.remove('lit'));
+  $$('#tcanvas .sel').forEach(e=>e.classList.remove('sel'));
+  $('#tdetail').className='tdetail empty';
+  $('#tdetail').innerHTML='Click any box in the tree to light up the route back to the start and read what that step means.';
+}
+function tSelect(box){
+  const t=treeCur(), n=t.nodes[box.dataset.id];
+  if(!n) return;
+  tClear();
+  const canvas=$('#tcanvas');
+  box.classList.add('sel');
+  const path=[];
+  let cur=box.closest('.tn');
+  while(cur){
+    const b=cur.querySelector(':scope > .tbox');
+    if(b){ b.classList.add('lit'); if(b.dataset.ans) path.unshift(b.dataset.ans); }
+    const br=tParentNode(cur);
+    if(!br) break;
+    br.classList.add('lit');
+    const par=br.closest('.tn');
+    if(par){ const pk=par.querySelector(':scope > .tkids'); if(pk) pk.classList.add('lit'); }
+    cur=par;
+  }
+  canvas.classList.add('has-sel');
+  const trail=`<div class="trail"><span class="crumb start">${esc(t.start)}</span>`+
+    path.map(p=>`<span class="arw">&rsaquo;</span><span class="crumb">${esc(p)}</span>`).join('')+`</div>`;
+  const why=box.dataset.note?`<p class="tnwhy">${esc(box.dataset.note)}</p>`:'';
+  const body=n.result
+    ? `${n.tag?`<span class="tag">${esc(n.tag)}</span>`:''}<h4 class="res">${esc(n.result)}</h4>`+
+      `${n.why?`<p class="thint">${esc(n.why)}</p>`:''}`+
+      `${n.next?`<div class="tnext"><b>What it means &mdash; </b>${esc(n.next)}</div>`:''}`
+    : `<h4>${esc(n.test)}</h4>${n.hint?`<p class="thint">${esc(n.hint)}</p>`:''}`;
+  $('#tdetail').className='tdetail';
+  $('#tdetail').innerHTML=trail+why+body;
 }
 function renderTree(){
-  const t=treeCur(); if(!t){$('#treeBox').innerHTML='';return;}
-  const box=$('#treeBox'); box.style.setProperty('--c',`var(--${t.color||'accent'})`);
-  const id=tNode||t.root, n=t.nodes[id];
-  const trail=`<div class="trail"><span class="crumb start">${esc(t.start)}</span>`+
-    tPath.map(p=>`<span class="arw">&rsaquo;</span><span class="crumb">${esc(p)}</span>`).join('')+`</div>`;
-  let body='';
-  if(!n){ body=`<p class="thint">This branch is not built out yet.</p>`; }
-  else if(n.result){
-    body=`<div class="tresult" style="--c:var(--${t.color||'accent'})">
-        ${n.tag?`<span class="tag">${esc(n.tag)}</span>`:''}
-        <h4>${esc(n.result)}</h4>
-        ${n.why?`<p class="why">${esc(n.why)}</p>`:''}
-        ${n.next?`<div class="next"><b>What it means &mdash; </b>${esc(n.next)}</div>`:''}
-      </div>`;
-  } else {
-    body=`<div class="tnode"><h4>${esc(n.test)}</h4>${n.hint?`<p class="thint">${esc(n.hint)}</p>`:''}
-      <div class="topts">`+(n.options||[]).map((o,i)=>
-        `<button class="topt" style="--c:var(--${t.color||'accent'})" data-go="${esc(o.go)}" data-lab="${esc(o.label)}">
-          <span><b>${esc(o.label)}</b>${o.note?`<small>${esc(o.note)}</small>`:''}</span><span class="go">&rarr;</span></button>`).join('')+
-      `</div></div>`;
-  }
-  box.innerHTML=(t.note?`<p class="tree-note">${esc(t.note)}</p>`:'')+trail+body+
-    `<div class="tbar">
-       ${tPath.length?`<button class="btn ghost" id="tback">Back a step</button>`:''}
-       ${tPath.length?`<button class="btn ghost" id="treset">Start over</button>`:''}
-       <button class="btn ghost" id="tmapbtn">${tMap?'Hide':'Show'} the whole tree</button>
+  const t=treeCur(), box=$('#treeBox');
+  if(!t){ box.innerHTML=''; return; }
+  box.style.setProperty('--c',`var(--${t.color||'accent'})`);
+  box.innerHTML=(t.note?`<p class="tree-note">${esc(t.note)}</p>`:'')+
+    `<div class="tlegend">
+       <span><i></i>Test or observation</span>
+       <span><i class="lr"></i>Identification or call</span>
+       <span class="thowto">Starts from: ${esc(t.start)}</span>
      </div>
-     <div class="tmap${tMap?' on':''}" style="--c:var(--${t.color||'accent'})"><ul>${mapHtml(t,t.root,0)}</ul></div>`;
-  $$('#treeBox .topt').forEach(b=>b.onclick=()=>{tPath.push(b.dataset.lab);tNode=b.dataset.go;renderTree();});
-  const back=$('#tback'), rst=$('#treset'), mb=$('#tmapbtn');
-  if(rst) rst.onclick=()=>{tPath=[];tNode=null;renderTree();};
-  if(back) back.onclick=()=>{ tPath.pop(); let cur=t.root;
-    for(const lab of tPath){ const nd=t.nodes[cur]; const op=(nd.options||[]).find(o=>o.label===lab); cur=op?op.go:cur; }
-    tNode=tPath.length?cur:null; renderTree(); };
-  if(mb) mb.onclick=()=>{tMap=!tMap;renderTree();};
+     <div class="tscroll"><div class="tcanvas" id="tcanvas">${tNodeHtml(t,t.root,'','',0,new Set())}</div></div>
+     <div class="tdetail empty" id="tdetail"></div>
+     <div class="tbar"><button class="btn ghost" id="tclear">Clear the highlight</button></div>`;
+  $$('#tcanvas .tbox').forEach(b=>{ if(b.dataset.id) b.onclick=()=>tSelect(b); });
+  $('#tclear').onclick=tClear;
+  tClear();
 }
 
 /* ---------- image gallery ---------- */
