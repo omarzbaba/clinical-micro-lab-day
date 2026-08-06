@@ -12,6 +12,12 @@ A **fun, compact, interactive** one-day orientation to the hospital clinical mic
 
 ## How it is organised
 
+Type is set from a 17px root on a deliberate scale — nothing renders below 12.4px,
+and reading copy sits at 16.5-18px. Within a chapter, the densest material is behind
+a segmented control (biosafety, the report, the recap) or an accordion (the fourteen
+test methods), and the glossary is a uniform list of 64 terms that opens the chosen
+definition in one fixed panel rather than reflowing the list.
+
 The dashboard is split into **ten chapters** shown one at a time — a tab strip in the
 sticky header, a progress hairline, and a previous/next pager at the foot of each
 chapter. Chapter links are shareable (`#biosafety`, `#algorithms`, …) and a legacy

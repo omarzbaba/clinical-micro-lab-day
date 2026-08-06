@@ -47,8 +47,14 @@ html[data-theme="dark"]{
   --accent:#ff6a5e; color-scheme:dark;
 }
 *,*::before,*::after{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:15.5px;line-height:1.55;
-  -webkit-font-smoothing:antialiased;letter-spacing:-.01em}
+/* ---------- TYPE SCALE v2 ----------
+   Everything on this page is sized in rem, which resolves against the ROOT, not
+   body — so the old `body{font-size:15.5px}` was inert and copy was rendering at
+   10-14px. The root is the real lever. 17px base, 1.62 leading. */
+html{font-size:17px}
+@media(max-width:520px){html{font-size:16.5px}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:1rem;line-height:1.62;
+  -webkit-font-smoothing:antialiased;letter-spacing:-.011em;text-rendering:optimizeLegibility}
 body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.5;
   background:radial-gradient(60% 40% at 12% 0%,rgba(224,138,36,.10),transparent 60%),
              radial-gradient(50% 40% at 90% 8%,rgba(31,150,196,.10),transparent 60%),
@@ -59,18 +65,18 @@ a{color:inherit}
 :focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:6px}
 .wrap{max-width:1180px;margin:0 auto;padding-left:clamp(20px,4vw,40px);padding-right:clamp(20px,4vw,40px)}
 section{padding:clamp(46px,4.6vw,74px) 0;scroll-margin-top:76px}
-.eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:.7rem;font-weight:800;text-transform:uppercase;
+.eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:.79rem;font-weight:800;text-transform:uppercase;
   letter-spacing:.12em;padding:5px 12px;border-radius:99px;background:var(--surface);border:2px solid var(--line-2)}
-h2.sec{font-size:clamp(1.55rem,1.1rem+1.8vw,2.3rem);margin:16px 0 10px}
-.sec-sub{color:var(--muted);max-width:64ch;font-size:.97rem;line-height:1.62}
+h2.sec{font-size:clamp(1.7rem,1.2rem+1.9vw,2.5rem);margin:16px 0 10px}
+.sec-sub{color:var(--muted);max-width:64ch;font-size:1.08rem;line-height:1.62}
 
 /* ---------- top bar ---------- */
 .bar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 86%,transparent);
   backdrop-filter:blur(14px) saturate(1.6);border-bottom:2px solid var(--line)}
 .bar-in{max-width:1180px;margin:0 auto;padding:10px clamp(20px,4vw,40px);display:flex;align-items:center;gap:14px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.02em;font-size:.95rem;white-space:nowrap;flex:0 0 auto}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.02em;font-size:1.06rem;white-space:nowrap;flex:0 0 auto}
 .tbtn{width:34px;height:34px;flex:0 0 auto;border-radius:10px;border:2px solid var(--line-2);background:var(--surface);
-  color:var(--ink);cursor:pointer;display:grid;place-items:center;font-size:.95rem}
+  color:var(--ink);cursor:pointer;display:grid;place-items:center;font-size:1.06rem}
 .tbtn:active{transform:scale(.93)}
 html[data-theme="dark"] .moon{display:none} html[data-theme="light"] .sun{display:none}
 
@@ -79,19 +85,19 @@ html[data-theme="dark"] .moon{display:none} html[data-theme="light"] .sun{displa
 .hero h1{font-size:clamp(2.1rem,1.3rem+3.6vw,3.5rem);letter-spacing:-.045em;margin:14px 0 12px}
 .hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--bacteriology),var(--mycology) 40%,var(--virology) 75%,var(--molecular));
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.lede{font-size:1.06rem;color:var(--muted);max-width:60ch}
+.lede{font-size:1.17rem;color:var(--muted);max-width:60ch}
 .lede b{color:var(--ink)}
 .namecard{display:inline-flex;align-items:center;gap:12px;margin-top:18px;padding:10px 16px 10px 10px;border-radius:99px;
   background:var(--surface);border:2px solid var(--line-2);box-shadow:var(--shadow)}
 .avs{display:flex}
-.avs span{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:.78rem;color:#fff;border:3px solid var(--surface)}
+.avs span{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:.87rem;color:#fff;border:3px solid var(--surface)}
 .avs span:nth-child(1){background:var(--bacteriology)} .avs span:nth-child(2){background:var(--virology);margin-left:-12px}
 .namecard div{line-height:1.2}
-.namecard strong{font-size:.9rem} .namecard small{color:var(--faint);font-size:.74rem;display:block}
+.namecard strong{font-size:1.01rem} .namecard small{color:var(--faint);font-size:.83rem;display:block}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(122px,1fr));gap:12px;margin-top:28px}
 .stat{padding:12px 15px;border-radius:14px;background:var(--surface);border:2px solid var(--line)}
-.stat b{display:block;font-size:1.45rem;font-weight:800;letter-spacing:-.04em}
-.stat span{font-size:.68rem;text-transform:uppercase;letter-spacing:.09em;color:var(--faint);font-weight:700}
+.stat b{display:block;font-size:1.55rem;font-weight:800;letter-spacing:-.04em}
+.stat span{font-size:.77rem;text-transform:uppercase;letter-spacing:.09em;color:var(--faint);font-weight:700}
 
 /* ---------- generic card grid ---------- */
 .grid{display:grid;gap:clamp(16px,1.8vw,24px)}
@@ -103,24 +109,24 @@ html[data-theme="dark"] .moon{display:none} html[data-theme="light"] .sun{displa
   padding:0;overflow:hidden;box-shadow:var(--shadow);transition:transform var(--dur) var(--ease),box-shadow var(--dur),border-color var(--dur)}
 .disc:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--c)}
 .disc-top{padding:15px 16px 13px;background:color-mix(in srgb,var(--c) 12%,var(--surface));border-bottom:2px solid color-mix(in srgb,var(--c) 30%,transparent);cursor:pointer;display:flex;gap:12px;align-items:flex-start}
-.dot{width:32px;height:32px;flex:0 0 auto;border-radius:50%;background:var(--c);display:grid;place-items:center;color:#fff;font-weight:800;font-size:.82rem;box-shadow:0 0 0 4px color-mix(in srgb,var(--c) 22%,transparent)}
-.disc h3{font-size:1.02rem;letter-spacing:-.02em}
-.disc .tag{font-size:.76rem;color:var(--muted);font-weight:600}
+.dot{width:32px;height:32px;flex:0 0 auto;border-radius:50%;background:var(--c);display:grid;place-items:center;color:#fff;font-weight:800;font-size:.94rem;box-shadow:0 0 0 4px color-mix(in srgb,var(--c) 22%,transparent)}
+.disc h3{font-size:1.13rem;letter-spacing:-.02em}
+.disc .tag{font-size:.85rem;color:var(--muted);font-weight:600}
 .disc .caret{margin-left:auto;color:var(--c);font-weight:800;transition:transform var(--dur)}
 .disc.open .caret{transform:rotate(45deg)}
-.disc-body{display:none;padding:14px 16px 16px;font-size:.88rem;color:var(--muted)}
+.disc-body{display:none;padding:14px 16px 16px;font-size:1.0rem;color:var(--muted)}
 .disc.open .disc-body{display:block;animation:pop .3s var(--ease)}
 @keyframes pop{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
-.mini-h{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;font-weight:800;color:var(--c);margin:12px 0 5px}
+.mini-h{font-size:.77rem;text-transform:uppercase;letter-spacing:.1em;font-weight:800;color:var(--c);margin:12px 0 5px}
 .pills{display:flex;flex-wrap:wrap;gap:5px}
-.pill{font-size:.74rem;font-weight:650;padding:4px 9px;border-radius:99px;background:var(--surface-2);border:1.5px solid var(--line)}
+.pill{font-size:.83rem;font-weight:650;padding:4px 9px;border-radius:99px;background:var(--surface-2);border:1.5px solid var(--line)}
 .pill.c{background:color-mix(in srgb,var(--c) 14%,transparent);border-color:color-mix(in srgb,var(--c) 34%,transparent);color:var(--ink)}
-.orgrow{display:flex;gap:8px;padding:6px 0;border-top:1px dashed var(--line);font-size:.83rem}
+.orgrow{display:flex;gap:8px;padding:6px 0;border-top:1px dashed var(--line);font-size:.95rem}
 .orgrow:first-of-type{border-top:none}
 .orgrow b{white-space:nowrap;font-style:italic;font-weight:700;color:var(--ink)}
 .orgrow span{color:var(--muted)}
 .tip{margin-top:12px;padding:10px 12px;border-radius:var(--r-sm);background:color-mix(in srgb,var(--c) 10%,transparent);
-  border-left:4px solid var(--c);font-size:.84rem;color:var(--ink)}
+  border-left:4px solid var(--c);font-size:.96rem;color:var(--ink)}
 .tip b{font-weight:800}
 
 /* ---------- journey ---------- */
@@ -129,18 +135,18 @@ html[data-theme="dark"] .moon{display:none} html[data-theme="light"] .sun{displa
   cursor:pointer;text-align:left;font:inherit;color:inherit;transition:all var(--dur) var(--ease)}
 .jstep:hover{transform:translateY(-2px);border-color:var(--accent)}
 .jstep.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.jnum{font-family:var(--mono);font-size:.7rem;font-weight:700;opacity:.65}
-.jstep b{display:block;font-size:.85rem;margin-top:3px;letter-spacing:-.02em}
+.jnum{font-family:var(--mono);font-size:.79rem;font-weight:700;opacity:.65}
+.jstep b{display:block;font-size:.97rem;margin-top:3px;letter-spacing:-.02em}
 .jdetail{margin-top:6px;padding:18px;border-radius:var(--r);background:var(--surface);border:2px solid var(--line);box-shadow:var(--shadow)}
-.jdetail h4{font-size:1.05rem;margin-bottom:6px}
-.jdetail p{font-size:.9rem;color:var(--muted)}
-.jwhy{margin-top:10px;font-size:.86rem;padding:9px 12px;border-radius:var(--r-sm);background:var(--surface-2);border-left:4px solid var(--virology)}
-.jwatch{margin-top:8px;font-size:.86rem;padding:9px 12px;border-radius:var(--r-sm);background:color-mix(in srgb,var(--bacteriology) 10%,transparent);border-left:4px solid var(--bacteriology)}
+.jdetail h4{font-size:1.16rem;margin-bottom:6px}
+.jdetail p{font-size:1.01rem;color:var(--muted)}
+.jwhy{margin-top:10px;font-size:.98rem;padding:9px 12px;border-radius:var(--r-sm);background:var(--surface-2);border-left:4px solid var(--virology)}
+.jwatch{margin-top:8px;font-size:.98rem;padding:9px 12px;border-radius:var(--r-sm);background:color-mix(in srgb,var(--bacteriology) 10%,transparent);border-left:4px solid var(--bacteriology)}
 
 /* ---------- benches ---------- */
 .btabs{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
 .btab{--c:var(--accent);display:flex;align-items:center;gap:7px;padding:8px 14px;border-radius:99px;border:2px solid var(--line);
-  background:var(--surface);font:inherit;font-size:.84rem;font-weight:700;color:var(--muted);cursor:pointer;transition:all var(--dur)}
+  background:var(--surface);font:inherit;font-size:.96rem;font-weight:700;color:var(--muted);cursor:pointer;transition:all var(--dur)}
 .btab:hover{color:var(--ink);border-color:var(--c)}
 .btab.on{background:var(--c);border-color:var(--c);color:#fff}
 .btab i{width:9px;height:9px;border-radius:50%;background:var(--c);display:block}
@@ -148,33 +154,33 @@ html[data-theme="dark"] .moon{display:none} html[data-theme="light"] .sun{displa
 .bpane{display:none} .bpane.on{display:block;animation:pop .3s var(--ease)}
 .bhead{--c:var(--accent);display:flex;gap:13px;align-items:flex-start;padding:16px;border-radius:var(--r) var(--r) 0 0;
   background:color-mix(in srgb,var(--c) 13%,var(--surface));border:2px solid color-mix(in srgb,var(--c) 32%,transparent);border-bottom:none}
-.bhead h3{font-size:1.15rem}
-.bhead p{font-size:.87rem;color:var(--muted);margin-top:3px}
+.bhead h3{font-size:1.26rem}
+.bhead p{font-size:.99rem;color:var(--muted);margin-top:3px}
 .bbody{border:2px solid var(--line);border-top:none;border-radius:0 0 var(--r) var(--r);background:var(--surface);padding:22px;
   display:grid;grid-template-columns:1fr 1fr;gap:24px}
-.bcol h4,.bcol h5{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);font-weight:800;margin-bottom:6px}
+.bcol h4,.bcol h5{font-size:.77rem;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);font-weight:800;margin-bottom:6px}
 .blist{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:5px}
-.blist li{font-size:.85rem;color:var(--muted);padding-left:16px;position:relative}
+.blist li{font-size:.97rem;color:var(--muted);padding-left:16px;position:relative}
 .blist li::before{content:"";position:absolute;left:0;top:.55em;width:6px;height:6px;border-radius:50%;background:var(--c,var(--accent))}
 .warn{margin-top:14px;grid-column:1/-1;display:flex;gap:10px;padding:11px 13px;border-radius:var(--r-sm);
-  background:color-mix(in srgb,var(--bacteriology) 9%,transparent);border-left:4px solid var(--bacteriology);font-size:.86rem}
+  background:color-mix(in srgb,var(--bacteriology) 9%,transparent);border-left:4px solid var(--bacteriology);font-size:.98rem}
 .warn b{font-weight:800}
 
 /* ---------- methods ---------- */
 .fchips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
-.fchip{padding:7px 14px;border-radius:99px;border:2px solid var(--line);background:var(--surface);font:inherit;font-size:.8rem;
+.fchip{padding:7px 14px;border-radius:99px;border:2px solid var(--line);background:var(--surface);font:inherit;font-size:.92rem;
   font-weight:700;color:var(--muted);cursor:pointer;transition:all var(--dur)}
 .fchip:hover{color:var(--ink)} .fchip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .mcard{--c:var(--accent);background:var(--surface);border:2px solid var(--line);border-left:6px solid var(--c);
   border-radius:var(--r-sm);padding:14px;transition:transform var(--dur) var(--ease),box-shadow var(--dur)}
 .mcard:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
-.mcard h4{font-size:.95rem;letter-spacing:-.02em}
-.mfam{font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--c);margin-bottom:5px}
-.mcard p{font-size:.85rem;color:var(--muted);margin-top:5px}
+.mcard h4{font-size:1.06rem;letter-spacing:-.02em}
+.mfam{font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--c);margin-bottom:5px}
+.mcard p{font-size:.97rem;color:var(--muted);margin-top:5px}
 .mmeta{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
-.mmeta span{font-size:.72rem;font-weight:650;padding:3px 8px;border-radius:7px;background:var(--surface-2);border:1.5px solid var(--line)}
+.mmeta span{font-size:.81rem;font-weight:650;padding:3px 8px;border-radius:7px;background:var(--surface-2);border:1.5px solid var(--line)}
 .mmeta span.t{color:var(--c);border-color:color-mix(in srgb,var(--c) 32%,transparent);background:color-mix(in srgb,var(--c) 10%,transparent)}
-.mcatch{margin-top:8px;font-size:.8rem;color:var(--muted);padding-top:8px;border-top:1px dashed var(--line)}
+.mcatch{margin-top:8px;font-size:.92rem;color:var(--muted);padding-top:8px;border-top:1px dashed var(--line)}
 .mcatch b{color:var(--ink);font-weight:800}
 
 /* ---------- flashcards ---------- */
@@ -186,59 +192,59 @@ html[data-theme="dark"] .moon{display:none} html[data-theme="light"] .sun{displa
   border:2px solid var(--line);padding:13px;display:flex;flex-direction:column;text-align:left;box-shadow:var(--shadow)}
 .face.front{--c:var(--accent);background:color-mix(in srgb,var(--c) 11%,var(--surface));border-color:color-mix(in srgb,var(--c) 30%,transparent)}
 .face.back{background:var(--ink);color:var(--bg);transform:rotateY(180deg);border-color:var(--ink)}
-.gtag{align-self:flex-start;font-size:.62rem;font-weight:800;letter-spacing:.08em;padding:3px 8px;border-radius:99px;
+.gtag{align-self:flex-start;font-size:.75rem;font-weight:800;letter-spacing:.08em;padding:3px 8px;border-radius:99px;
   background:var(--c);color:#fff;text-transform:uppercase}
-.face.front b{margin-top:auto;font-size:.95rem;font-style:italic;letter-spacing:-.02em;line-height:1.2}
-.face.front small{font-size:.74rem;color:var(--muted);margin-top:4px}
-.face.back .k{font-size:.62rem;text-transform:uppercase;letter-spacing:.09em;opacity:.6;font-weight:800;margin-top:7px}
-.face.back .v{font-size:.82rem;line-height:1.35}
+.face.front b{margin-top:auto;font-size:1.06rem;font-style:italic;letter-spacing:-.02em;line-height:1.2}
+.face.front small{font-size:.83rem;color:var(--muted);margin-top:4px}
+.face.back .k{font-size:.75rem;text-transform:uppercase;letter-spacing:.09em;opacity:.6;font-weight:800;margin-top:7px}
+.face.back .v{font-size:.94rem;line-height:1.35}
 .face.back .v:first-of-type{margin-top:0}
-.hintline{font-size:.78rem;color:var(--faint);margin-bottom:10px}
+.hintline{font-size:.87rem;color:var(--faint);margin-bottom:10px}
 
 /* ---------- bench game ---------- */
 .game{background:var(--surface);border:2px solid var(--line);border-radius:var(--r);padding:18px;box-shadow:var(--shadow)}
-.gspec{font-size:1.02rem;font-weight:700;letter-spacing:-.02em;margin:4px 0 14px}
+.gspec{font-size:1.13rem;font-weight:700;letter-spacing:-.02em;margin:4px 0 14px}
 .gopts{display:flex;flex-wrap:wrap;gap:8px}
 .gopt{--c:var(--accent);padding:9px 15px;border-radius:99px;border:2px solid var(--line);background:var(--surface);
-  font:inherit;font-size:.85rem;font-weight:700;cursor:pointer;color:var(--ink);transition:all var(--dur)}
+  font:inherit;font-size:.97rem;font-weight:700;cursor:pointer;color:var(--ink);transition:all var(--dur)}
 .gopt:hover:not(:disabled){border-color:var(--c);transform:translateY(-2px)}
 .gopt:disabled{cursor:default;opacity:.55}
 .gopt.right{background:var(--parasitology);border-color:var(--parasitology);color:#fff;opacity:1}
 .gopt.wrong{background:var(--bacteriology);border-color:var(--bacteriology);color:#fff;opacity:1}
-.gfb{margin-top:13px;font-size:.88rem;padding:11px 13px;border-radius:var(--r-sm);background:var(--surface-2);
+.gfb{margin-top:13px;font-size:1.0rem;padding:11px 13px;border-radius:var(--r-sm);background:var(--surface-2);
   border-left:4px solid var(--accent);display:none}
 .gfb.show{display:block;animation:pop .3s var(--ease)}
 .gbar{display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap}
 .gprog{flex:1;min-width:120px;height:8px;border-radius:99px;background:var(--surface-2);overflow:hidden;border:1.5px solid var(--line)}
 .gprog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--mycology),var(--parasitology));transition:width .4s var(--ease)}
 .btn{padding:9px 18px;border-radius:99px;border:2px solid var(--ink);background:var(--ink);color:var(--bg);
-  font:inherit;font-size:.85rem;font-weight:700;cursor:pointer;transition:transform var(--dur)}
+  font:inherit;font-size:.97rem;font-weight:700;cursor:pointer;transition:transform var(--dur)}
 .btn:active{transform:scale(.97)}
 .btn.ghost{background:transparent;color:var(--ink)}
 
 /* ---------- quiz ---------- */
 .q{background:var(--surface);border:2px solid var(--line);border-radius:var(--r);padding:21px 23px;margin-bottom:17px;box-shadow:var(--shadow)}
-.qn{font-family:var(--mono);font-size:.72rem;font-weight:700;color:var(--faint)}
-.qs{font-size:.95rem;font-weight:650;margin:5px 0 12px;letter-spacing:-.01em}
+.qn{font-family:var(--mono);font-size:.81rem;font-weight:700;color:var(--faint)}
+.qs{font-size:1.06rem;font-weight:650;margin:5px 0 12px;letter-spacing:-.01em}
 .qo{display:flex;flex-direction:column;gap:7px}
 .opt{display:flex;gap:10px;align-items:flex-start;text-align:left;padding:10px 13px;border-radius:var(--r-sm);
-  border:2px solid var(--line);background:var(--surface-2);font:inherit;font-size:.87rem;color:var(--ink);cursor:pointer;transition:all var(--dur)}
+  border:2px solid var(--line);background:var(--surface-2);font:inherit;font-size:.99rem;color:var(--ink);cursor:pointer;transition:all var(--dur)}
 .opt:hover:not(:disabled){border-color:var(--accent)}
 .opt:disabled{cursor:default}
-.opt .key{font-family:var(--mono);font-weight:800;font-size:.75rem;width:20px;height:20px;flex:0 0 auto;border-radius:6px;
+.opt .key{font-family:var(--mono);font-weight:800;font-size:.83rem;width:20px;height:20px;flex:0 0 auto;border-radius:6px;
   display:grid;place-items:center;background:var(--surface);border:1.5px solid var(--line)}
 .opt.right{border-color:var(--parasitology);background:color-mix(in srgb,var(--parasitology) 13%,transparent)}
 .opt.right .key{background:var(--parasitology);color:#fff;border-color:var(--parasitology)}
 .opt.wrong{border-color:var(--bacteriology);background:color-mix(in srgb,var(--bacteriology) 11%,transparent)}
 .opt.wrong .key{background:var(--bacteriology);color:#fff;border-color:var(--bacteriology)}
-.qex{display:none;margin-top:12px;padding-top:11px;border-top:2px dashed var(--line);font-size:.86rem;color:var(--muted)}
+.qex{display:none;margin-top:12px;padding-top:11px;border-top:2px dashed var(--line);font-size:.98rem;color:var(--muted)}
 .qex.show{display:block;animation:pop .3s var(--ease)}
 .qex .v{font-weight:800;margin-bottom:5px}
 .qex .v.ok{color:var(--parasitology)} .qex .v.no{color:var(--bacteriology)}
 .qex .p{margin-top:8px;padding:9px 12px;border-radius:var(--r-sm);background:color-mix(in srgb,var(--mycology) 12%,transparent);
   border-left:4px solid var(--mycology);color:var(--ink)}
 .score{position:sticky;bottom:14px;margin-top:14px;display:flex;align-items:center;gap:12px;padding:11px 16px;border-radius:99px;
-  background:var(--ink);color:var(--bg);box-shadow:var(--shadow-lg);font-size:.85rem;font-weight:700;width:fit-content;
+  background:var(--ink);color:var(--bg);box-shadow:var(--shadow-lg);font-size:.97rem;font-weight:700;width:fit-content;
   pointer-events:none}
 
 
@@ -247,7 +253,7 @@ html[data-theme="dark"] .moon{display:none} html[data-theme="light"] .sun{displa
 #quizList .q.on{display:block;animation:pop .28s var(--ease)}
 #quizList.review .q{display:block;margin-bottom:17px}
 .qbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:18px}
-.qstep{font-size:.82rem;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.qstep{font-size:.94rem;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
 .qpips{display:flex;gap:12px;flex-wrap:wrap}
 .qpip{position:relative;width:12px;height:12px;border-radius:50%;background:var(--faint);border:2px solid transparent;padding:0;cursor:pointer;
   transition:transform var(--dur) var(--ease),background var(--dur),border-color var(--dur)}
@@ -261,14 +267,14 @@ html[data-theme="dark"] .moon{display:none} html[data-theme="light"] .sun{displa
 .qdone{display:none;margin-top:18px;padding:22px;border-radius:var(--r);background:var(--surface);
   border:2px solid var(--line);border-left:6px solid var(--parasitology);box-shadow:var(--shadow)}
 .qdone.show{display:block;animation:pop .3s var(--ease)}
-.qdone .big{font:800 2.1rem/1 var(--font);letter-spacing:-.04em}
-.qdone p{margin-top:7px;color:var(--muted);font-size:.9rem;line-height:1.6}
+.qdone .big{font:800 2.2rem/1 var(--font);letter-spacing:-.04em}
+.qdone p{margin-top:7px;color:var(--muted);font-size:1.01rem;line-height:1.6}
 
 /* ---------- footer ---------- */
 footer{margin-top:20px;border-top:2px solid var(--line);background:var(--bg-2)}
 footer .wrap{padding-top:26px;padding-bottom:40px}
-footer p{font-size:.83rem;color:var(--muted);margin-bottom:8px}
-.copyright{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-size:.76rem;color:var(--faint);line-height:1.5}
+footer p{font-size:.95rem;color:var(--muted);margin-bottom:8px}
+.copyright{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-size:.85rem;color:var(--faint);line-height:1.5}
 .copyright strong{color:var(--muted);font-weight:800}
 
 /* WCAG 1.4.3 — white text needs a deeper fill than the bright tokens give (2.25:1-4.17:1 as authored). `html ` prefix so these win over the later-defined .tchip/.ttag/.tag/.steps rules */
@@ -316,13 +322,13 @@ html .opt,html .gopt,html .btab,html .fchip,html .tchip,html .jstep,html .tbox,h
 .anim-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .anim{--c:var(--accent);background:var(--surface);border:2px solid var(--line);border-left:6px solid var(--c);
   border-radius:var(--r);padding:14px;box-shadow:var(--shadow)}
-.anim h4{font-size:.95rem;letter-spacing:-.02em}
-.anim .cap{font-size:.82rem;color:var(--muted);margin-top:7px}
+.anim h4{font-size:1.06rem;letter-spacing:-.02em}
+.anim .cap{font-size:.94rem;color:var(--muted);margin-top:7px}
 .anim .stage{margin-top:10px;border-radius:var(--r-sm);background:var(--surface-2);border:1.5px solid var(--line);
   overflow:hidden;display:block;width:100%}
 .anim svg{display:block;width:100%;height:auto}
 .legend{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
-.legend span{font-size:.68rem;font-weight:700;padding:2px 7px;border-radius:99px;background:var(--surface-2);border:1.5px solid var(--line)}
+.legend span{font-size:.77rem;font-weight:700;padding:2px 7px;border-radius:99px;background:var(--surface-2);border:1.5px solid var(--line)}
 
 /* hero petri dish */
 .petri{position:absolute;right:-10px;top:-6px;width:210px;height:210px;opacity:.9;pointer-events:none}
@@ -391,9 +397,9 @@ html .opt,html .gopt,html .btab,html .fchip,html .tchip,html .jstep,html .tbox,h
 .shot:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
 .shot img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:contain;background:#0d0b09;
   border-bottom:2px solid var(--line)}
-.shot figcaption{padding:11px 13px;font-size:.8rem;color:var(--muted);line-height:1.45}
+.shot figcaption{padding:11px 13px;font-size:.92rem;color:var(--muted);line-height:1.45}
 .shot figcaption b{color:var(--ink);font-weight:800;display:block;margin-bottom:2px}
-.shot .cr{display:block;margin-top:7px;font-size:.63rem;color:var(--faint);line-height:1.35}
+.shot .cr{display:block;margin-top:7px;font-size:.75rem;color:var(--faint);line-height:1.35}
 .shot .cr a{color:var(--faint)}
 .shot .cr a:hover{color:var(--accent)}
 
@@ -415,7 +421,7 @@ html .opt,html .gopt,html .btab,html .fchip,html .tchip,html .jstep,html .tbox,h
    ============================================================ */
 .tchips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
 .tchip{--c:var(--accent);display:flex;align-items:center;gap:8px;padding:9px 16px;border-radius:99px;border:2px solid var(--line);
-  background:var(--surface);font:inherit;font-size:.83rem;font-weight:700;color:var(--muted);cursor:pointer;transition:all var(--dur)}
+  background:var(--surface);font:inherit;font-size:.95rem;font-weight:700;color:var(--muted);cursor:pointer;transition:all var(--dur)}
 .tchip:hover{color:var(--ink);border-color:var(--c)}
 .tchip.on{background:var(--c);border-color:var(--c);color:#fff}
 .tchip i{width:9px;height:9px;border-radius:50%;background:var(--c);display:block}
@@ -424,8 +430,8 @@ html .opt,html .gopt,html .btab,html .fchip,html .tchip,html .jstep,html .tbox,h
 .tree{--c:var(--accent);--tw:172px;--tgap:44px;--tsep:20px;--tline:var(--line-2);
   background:var(--surface);border:2px solid var(--line);border-left:6px solid var(--c);
   border-radius:var(--r);padding:24px;box-shadow:var(--shadow)}
-.tree-note{font-size:.85rem;color:var(--muted);line-height:1.6;max-width:80ch;margin-bottom:16px;padding-bottom:16px;border-bottom:2px dashed var(--line)}
-.tlegend{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-bottom:18px;font-size:.75rem;color:var(--muted);font-weight:650}
+.tree-note{font-size:.97rem;color:var(--muted);line-height:1.6;max-width:80ch;margin-bottom:16px;padding-bottom:16px;border-bottom:2px dashed var(--line)}
+.tlegend{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-bottom:18px;font-size:.83rem;color:var(--muted);font-weight:650}
 .tlegend span{display:inline-flex;align-items:center;gap:7px}
 .tlegend i{width:15px;height:15px;border-radius:5px;border:2px solid var(--line);background:var(--surface);display:block}
 .tlegend i.lr{border-color:color-mix(in srgb,var(--c) 45%,transparent);background:color-mix(in srgb,var(--c) 20%,var(--surface))}
@@ -440,12 +446,12 @@ html .opt,html .gopt,html .btab,html .fchip,html .tchip,html .jstep,html .tbox,h
   background:var(--surface);border:2px solid var(--line);border-radius:var(--r-sm);overflow:hidden;box-shadow:var(--shadow);
   transition:transform var(--dur) var(--ease),border-color var(--dur),box-shadow var(--dur),opacity var(--dur)}
 .tbox:hover{border-color:var(--c);transform:translateY(-2px);box-shadow:var(--shadow-lg)}
-.tans{display:block;padding:6px 11px;font-size:.71rem;font-weight:750;line-height:1.32;
+.tans{display:block;padding:6px 11px;font-size:.81rem;font-weight:750;line-height:1.32;
   background:color-mix(in srgb,var(--c) 14%,var(--surface-2));border-bottom:1.5px solid var(--line);color:var(--ink)}
-.tttl{display:block;padding:10px 11px;font-size:.8rem;font-weight:750;line-height:1.3}
+.tttl{display:block;padding:10px 11px;font-size:.92rem;font-weight:750;line-height:1.3}
 .tbox.is-r{border-color:color-mix(in srgb,var(--c) 42%,transparent);background:color-mix(in srgb,var(--c) 9%,var(--surface))}
 .tbox.is-r .tttl{font-style:italic;font-weight:800;padding-bottom:4px}
-.ttag{display:inline-block;margin:0 11px 10px;font-size:.58rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+.ttag{display:inline-block;margin:0 11px 10px;font-size:.73rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
   padding:2px 8px;border-radius:99px;background:var(--c);color:#fff}
 .tbox.sel{border-color:var(--c);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 32%,transparent),var(--shadow-lg)}
 
@@ -468,23 +474,23 @@ html .opt,html .gopt,html .btab,html .fchip,html .tchip,html .jstep,html .tbox,h
 
 .tdetail{margin-top:6px;border-radius:var(--r-sm);padding:18px 20px;background:var(--surface-2);
   border:2px solid var(--line);border-left:5px solid var(--c);max-width:82ch}
-.tdetail.empty{color:var(--muted);font-size:.86rem;border-left-color:var(--line);line-height:1.6}
-.trail{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-bottom:12px;font-size:.72rem}
+.tdetail.empty{color:var(--muted);font-size:.98rem;border-left-color:var(--line);line-height:1.6}
+.trail{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-bottom:12px;font-size:.81rem}
 .crumb{padding:4px 11px;border-radius:99px;background:var(--surface);border:1.5px solid var(--line);font-weight:700;color:var(--muted)}
 .crumb.start{background:color-mix(in srgb,var(--c) 14%,transparent);border-color:color-mix(in srgb,var(--c) 34%,transparent);color:var(--ink)}
 .trail .arw{color:var(--faint);font-weight:800}
-.tdetail h4{font-size:1.14rem;letter-spacing:-.025em}
-.tdetail h4.res{font-style:italic;font-size:1.26rem}
-.tdetail .tag{display:inline-block;font-size:.62rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+.tdetail h4{font-size:1.25rem;letter-spacing:-.025em}
+.tdetail h4.res{font-style:italic;font-size:1.37rem}
+.tdetail .tag{display:inline-block;font-size:.75rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
   padding:3px 10px;border-radius:99px;background:var(--c);color:#fff;margin-bottom:8px}
-.thint{font-size:.88rem;color:var(--muted);margin-top:8px;line-height:1.62}
-.tnwhy{font-size:.85rem;margin-bottom:11px;padding:10px 13px;border-radius:var(--r-sm);
+.thint{font-size:1.0rem;color:var(--muted);margin-top:8px;line-height:1.62}
+.tnwhy{font-size:.97rem;margin-bottom:11px;padding:10px 13px;border-radius:var(--r-sm);
   background:var(--surface);border-left:4px solid var(--tline);color:var(--muted);line-height:1.55}
 .tnext{margin-top:13px;padding:12px 15px;border-radius:var(--r-sm);background:var(--surface);
-  border-left:4px solid var(--c);font-size:.87rem;line-height:1.6}
+  border-left:4px solid var(--c);font-size:.99rem;line-height:1.6}
 .tnext b{font-weight:800}
 .tbar{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;align-items:center}
-.thowto{font-size:.78rem;color:var(--faint)}
+.thowto{font-size:.87rem;color:var(--faint)}
 @media(max-width:760px){.tree{--tw:148px;--tgap:32px;--tsep:15px;padding:18px}}
 
 /* ============================================================
@@ -492,58 +498,58 @@ html .opt,html .gopt,html .btab,html .fchip,html .tchip,html .jstep,html .tbox,h
    ============================================================ */
 .bsl{--c:var(--accent);background:var(--surface);border:2px solid var(--line);border-top:6px solid var(--c);
   border-radius:var(--r);padding:20px;box-shadow:var(--shadow)}
-.bsl .lv{font-family:var(--mono);font-size:.72rem;font-weight:800;color:var(--c);letter-spacing:.06em}
+.bsl .lv{font-family:var(--mono);font-size:.81rem;font-weight:800;color:var(--c);letter-spacing:.06em}
 .bsl h4{font-size:1rem;margin-top:2px}
-.bsl.fold h4,.stage.fold h4{font-size:.98rem;line-height:1.35}
+.bsl.fold h4,.stage.fold h4{font-size:1.09rem;line-height:1.35}
 .bsl.fold .fold-body,.stage.fold .fold-body{max-width:78ch}
-.bsl .work{font-size:.84rem;margin-top:12px;padding:11px 13px;border-radius:var(--r-sm);background:var(--surface-2);line-height:1.55}
+.bsl .work{font-size:.96rem;margin-top:12px;padding:11px 13px;border-radius:var(--r-sm);background:var(--surface-2);line-height:1.55}
 
 .danger{background:color-mix(in srgb,var(--bacteriology) 10%,var(--surface));
   border:2px solid color-mix(in srgb,var(--bacteriology) 40%,transparent);border-radius:var(--r);padding:16px}
-.danger h3{font-size:1.05rem;color:var(--bacteriology)}
+.danger h3{font-size:1.16rem;color:var(--bacteriology)}
 .sent{display:grid;grid-template-columns:1fr;gap:11px;margin-top:18px}
 .sentrow{display:grid;grid-template-columns:minmax(150px,.8fr) 1.4fr 1.4fr;gap:16px;padding:14px 16px;border-radius:var(--r-sm);
-  background:var(--surface);border:1.5px solid var(--line);font-size:.84rem}
+  background:var(--surface);border:1.5px solid var(--line);font-size:.96rem}
 .sentrow b{font-style:italic;font-weight:800}
 .sentrow .act{color:var(--bacteriology);font-weight:650}
 .rules{display:grid;grid-template-columns:repeat(2,1fr);gap:13px;margin-top:18px}
-.rule{display:flex;gap:11px;padding:14px 16px;border-radius:var(--r-sm);background:var(--surface);border:1.5px solid var(--line);font-size:.85rem;line-height:1.5}
+.rule{display:flex;gap:11px;padding:14px 16px;border-radius:var(--r-sm);background:var(--surface);border:1.5px solid var(--line);font-size:.97rem;line-height:1.5}
 .rule .x{color:var(--bacteriology);font-weight:800;flex:0 0 auto}
-.rule small{display:block;color:var(--muted);font-size:.78rem;margin-top:2px}
+.rule small{display:block;color:var(--muted);font-size:.87rem;margin-top:2px}
 .steps{counter-reset:st;list-style:none;padding:0;margin:12px 0 0;display:flex;flex-direction:column;gap:8px}
 .steps li{counter-increment:st;position:relative;padding:10px 12px 10px 44px;border-radius:var(--r-sm);
-  background:var(--surface);border:1.5px solid var(--line);font-size:.85rem}
+  background:var(--surface);border:1.5px solid var(--line);font-size:.97rem}
 .steps li::before{content:counter(st);position:absolute;left:12px;top:9px;width:22px;height:22px;border-radius:7px;
-  background:var(--bacteriology);color:#fff;font:800 .74rem var(--mono);display:grid;place-items:center}
+  background:var(--bacteriology);color:#fff;font:800 .83rem var(--mono);display:grid;place-items:center}
 
 article.stage{--c:var(--accent);background:var(--surface);border:2px solid var(--line);border-left:6px solid var(--c);
   border-radius:var(--r-sm);padding:19px}
-.stage .when{font-family:var(--mono);font-size:.7rem;font-weight:700;color:var(--c);letter-spacing:.05em}
-.stage h4{font-size:.96rem;margin-top:3px}
-.stage p{font-size:.86rem;color:var(--muted);margin-top:8px;line-height:1.6}
-.stage .trap{margin-top:9px;font-size:.82rem;padding:8px 11px;border-radius:8px;
+.stage .when{font-family:var(--mono);font-size:.79rem;font-weight:700;color:var(--c);letter-spacing:.05em}
+.stage h4{font-size:1.07rem;margin-top:3px}
+.stage p{font-size:.98rem;color:var(--muted);margin-top:8px;line-height:1.6}
+.stage .trap{margin-top:9px;font-size:.94rem;padding:8px 11px;border-radius:8px;
   background:color-mix(in srgb,var(--bacteriology) 9%,transparent);border-left:3px solid var(--bacteriology)}
 
 .sirgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .sircard{--c:var(--accent);text-align:center;padding:14px 12px;border-radius:var(--r);background:var(--surface);
   border:2px solid var(--line);border-top:5px solid var(--c)}
-.sircard .code{font:800 1.6rem/1 var(--font);color:var(--c);letter-spacing:-.04em}
-.sircard .lab{font-size:.76rem;font-weight:800;margin-top:4px}
-.sircard .mn{font-size:.8rem;color:var(--muted);margin-top:6px;text-align:left}
-.sircard .cv{font-size:.76rem;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line);color:var(--faint);text-align:left}
+.sircard .code{font:800 1.70rem/1 var(--font);color:var(--c);letter-spacing:-.04em}
+.sircard .lab{font-size:.85rem;font-weight:800;margin-top:4px}
+.sircard .mn{font-size:.92rem;color:var(--muted);margin-top:6px;text-align:left}
+.sircard .cv{font-size:.85rem;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line);color:var(--faint);text-align:left}
 
-table.tt{width:100%;border-collapse:collapse;font-size:.84rem}
+table.tt{width:100%;border-collapse:collapse;font-size:.96rem}
 .tt th,.tt td{padding:9px 12px;text-align:left;border-bottom:1.5px solid var(--line);vertical-align:top}
-.tt thead th{background:var(--surface-2);font-size:.68rem;text-transform:uppercase;letter-spacing:.07em;color:var(--faint);font-weight:800}
+.tt thead th{background:var(--surface-2);font-size:.77rem;text-transform:uppercase;letter-spacing:.07em;color:var(--faint);font-weight:800}
 .tt tbody tr:last-child td{border-bottom:none}
 .tt tbody tr:hover{background:var(--surface-2)}
-.tt code{font-family:var(--mono);font-size:.79rem;background:var(--surface-2);padding:2px 6px;border-radius:5px;border:1px solid var(--line)}
+.tt code{font-family:var(--mono);font-size:.88rem;background:var(--surface-2);padding:2px 6px;border-radius:5px;border:1px solid var(--line)}
 .twrap{border:2px solid var(--line);border-radius:var(--r);overflow-x:auto;overflow-y:hidden;background:var(--surface);box-shadow:var(--shadow)}
 .twrap+.twrap{margin-top:14px}
 
 .gsearch{display:flex;align-items:center;gap:10px;padding:11px 15px;border-radius:99px;background:var(--surface);
   border:2px solid var(--line);margin-bottom:12px}
-.gsearch input{flex:1;border:none;background:transparent;color:var(--ink);font:inherit;font-size:.92rem}
+.gsearch input{flex:1;border:none;background:transparent;color:var(--ink);font:inherit;font-size:1.03rem}
 .gsearch:focus-within{outline:3px solid var(--accent);outline-offset:2px}
 .gsearch input:focus-visible{outline:none}
 .gsearch input::placeholder{color:var(--faint)}
@@ -551,28 +557,28 @@ table.tt{width:100%;border-collapse:collapse;font-size:.84rem}
 .gterm{padding:15px 17px;border-radius:var(--r-sm);background:var(--surface);border:1.5px solid var(--line);
   transition:transform var(--dur),border-color var(--dur)}
 .gterm:hover{transform:translateY(-2px);border-color:var(--accent)}
-.gterm .t{font-weight:800;font-size:.88rem;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
-.gterm .ab{font-family:var(--mono);font-size:.7rem;padding:1px 6px;border-radius:5px;background:var(--surface-2);border:1px solid var(--line);color:var(--muted)}
-.gterm .d{font-size:.83rem;color:var(--muted);margin-top:6px;line-height:1.58}
-.gterm .tg{font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--faint);margin-top:6px;display:block}
+.gterm .t{font-weight:800;font-size:1.0rem;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.gterm .ab{font-family:var(--mono);font-size:.79rem;padding:1px 6px;border-radius:5px;background:var(--surface-2);border:1px solid var(--line);color:var(--muted)}
+.gterm .d{font-size:.95rem;color:var(--muted);margin-top:6px;line-height:1.58}
+.gterm .tg{font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--faint);margin-top:6px;display:block}
 .gempty{grid-column:1/-1;text-align:center;padding:34px;color:var(--faint)}
 
 .take{counter-reset:tk;list-style:none;padding:0;margin:0}
 .take li{counter-increment:tk;position:relative;padding:13px 15px 13px 50px;margin-bottom:9px;border-radius:var(--r-sm);
-  background:var(--surface);border:2px solid var(--line);font-size:.87rem}
+  background:var(--surface);border:2px solid var(--line);font-size:.99rem}
 .take li::before{content:counter(tk,decimal-leading-zero);position:absolute;left:15px;top:14px;
-  font:800 .76rem var(--mono);color:var(--accent)}
+  font:800 .85rem var(--mono);color:var(--accent)}
 .take b{font-weight:800}
-.take small{display:block;color:var(--muted);font-size:.83rem;margin-top:3px;font-weight:500}
+.take small{display:block;color:var(--muted);font-size:.95rem;margin-top:3px;font-weight:500}
 .saylist{list-style:none;padding:0;margin:8px 0 0;display:flex;flex-direction:column;gap:9px}
-.saylist li{font-size:.85rem;color:var(--muted);padding-left:18px;position:relative;line-height:1.45}
-.saylist li::before{content:"\201C";position:absolute;left:0;top:-3px;color:var(--accent);font-size:1.2rem;font-weight:800}
+.saylist li{font-size:.97rem;color:var(--muted);padding-left:18px;position:relative;line-height:1.45}
+.saylist li::before{content:"\201C";position:absolute;left:0;top:-3px;color:var(--accent);font-size:1.32rem;font-weight:800}
 .asklist{list-style:none;padding:0;margin:8px 0 0;display:flex;flex-direction:column;gap:8px}
-.asklist li{font-size:.85rem;padding:9px 12px;border-radius:9px;background:var(--surface-2);border:1.5px solid var(--line);color:var(--muted)}
+.asklist li{font-size:.97rem;padding:9px 12px;border-radius:9px;background:var(--surface-2);border:1.5px solid var(--line);color:var(--muted)}
 .closing{margin-top:16px;padding:18px;border-radius:var(--r);text-align:center;
   background:linear-gradient(135deg,color-mix(in srgb,var(--bacteriology) 10%,var(--surface)),color-mix(in srgb,var(--molecular) 10%,var(--surface)));
   border:2px solid var(--line)}
-.closing p{font-size:1.02rem;font-weight:650;max-width:56ch;margin:0 auto;letter-spacing:-.015em}
+.closing p{font-size:1.13rem;font-weight:650;max-width:56ch;margin:0 auto;letter-spacing:-.015em}
 
 @media(max-width:960px){.sirgrid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:680px){.rules,.sirgrid{grid-template-columns:1fr}.sentrow{grid-template-columns:1fr;gap:6px}}
@@ -582,7 +588,7 @@ table.tt{width:100%;border-collapse:collapse;font-size:.84rem}
    ============================================================ */
 .tabs{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .tabs::-webkit-scrollbar{display:none}
-.tabs button{font:inherit;font-size:.78rem;font-weight:700;padding:7px 11px;border-radius:99px;border:2px solid transparent;
+.tabs button{font:inherit;font-size:.87rem;font-weight:700;padding:7px 11px;border-radius:99px;border:2px solid transparent;
   background:none;color:var(--muted);white-space:nowrap;cursor:pointer;transition:background var(--dur),color var(--dur),border-color var(--dur)}
 .tabs button:hover{color:var(--ink);background:var(--surface-2)}
 .tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
@@ -601,11 +607,11 @@ html.js main>section[id].show,html.js main>.hero.show{display:block}
   border:2px solid var(--line);background:var(--surface);font:inherit;color:inherit;cursor:pointer;max-width:44%;
   transition:transform var(--dur) var(--ease),border-color var(--dur),box-shadow var(--dur)}
 .pnav:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow)}
-.pnav small{font-size:.66rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--faint)}
-.pnav b{font-size:.95rem;font-weight:800;letter-spacing:-.02em}
+.pnav small{font-size:.77rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--faint)}
+.pnav b{font-size:1.06rem;font-weight:800;letter-spacing:-.02em}
 .pnav.next{text-align:right;margin-left:auto;align-items:flex-end}
-.pcount{font-size:.76rem;font-weight:700;color:var(--faint);font-variant-numeric:tabular-nums;margin:0 auto;flex:0 0 auto}
-@media(max-width:560px){.pnav b{font-size:.85rem}.pager{gap:8px;padding-left:20px;padding-right:20px}.pcount{display:none}}
+.pcount{font-size:.85rem;font-weight:700;color:var(--faint);font-variant-numeric:tabular-nums;margin:0 auto;flex:0 0 auto}
+@media(max-width:560px){.pnav b{font-size:.97rem}.pager{gap:8px;padding-left:20px;padding-right:20px}.pcount{display:none}}
 
 /* ============================================================
    FOLDING CARDS — headline first, body on demand
@@ -615,14 +621,63 @@ html.js main>section[id].show,html.js main>.hero.show{display:block}
   background:none;border:none;padding:0;cursor:pointer}
 .fold-top>div{flex:1 1 auto;min-width:0}
 .fold .caret{flex:0 0 auto;width:26px;height:26px;border-radius:9px;display:grid;place-items:center;
-  background:color-mix(in srgb,var(--c) 15%,var(--surface-2));color:var(--c);font-weight:800;font-size:1.05rem;line-height:1;
+  background:color-mix(in srgb,var(--c) 15%,var(--surface-2));color:var(--c);font-weight:800;font-size:1.16rem;line-height:1;
   transition:transform var(--dur) var(--ease)}
 .fold.open .caret{transform:rotate(45deg)}
 .fold-body{display:none;margin-top:14px;padding-top:14px;border-top:2px dashed var(--line)}
 .fold.open .fold-body{display:block;animation:pop .28s var(--ease)}
 .fold-top:hover .caret{background:color-mix(in srgb,var(--c) 28%,var(--surface-2))}
 .foldbar{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-top:20px}
-.foldbar .hint{font-size:.78rem;color:var(--faint)}
+.foldbar .hint{font-size:.87rem;color:var(--faint)}
+
+/* ============================================================
+   SUB-TABS — one panel of a chapter on screen at a time
+   ============================================================ */
+.subtabs{display:flex;flex-wrap:wrap;gap:6px;margin:26px 0 22px;padding:5px;border-radius:99px;
+  background:var(--surface-2);border:2px solid var(--line);width:fit-content;max-width:100%}
+.subtabs button{font:inherit;font-size:.87rem;font-weight:750;padding:9px 17px;border-radius:99px;border:none;
+  background:none;color:var(--muted);cursor:pointer;white-space:nowrap;
+  transition:background var(--dur),color var(--dur),box-shadow var(--dur)}
+.subtabs button:hover{color:var(--ink)}
+.subtabs button[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+.subpanel{display:none}
+.subpanel.on{display:block;animation:pop .3s var(--ease)}
+.panel-lede{font-size:1.02rem;color:var(--muted);line-height:1.62;max-width:66ch;margin-bottom:20px}
+
+/* ---------- method accordion ---------- */
+.mlist{display:flex;flex-direction:column;gap:11px}
+.mrow{--c:var(--accent);background:var(--surface);border:2px solid var(--line);border-left:6px solid var(--c);
+  border-radius:var(--r-sm);padding:17px 19px;box-shadow:var(--shadow);transition:border-color var(--dur)}
+.mrow .fold-top{align-items:center}
+.mrow h4{font-size:1.09rem;letter-spacing:-.02em}
+.mrow .mfam{margin-bottom:4px}
+.mrow .fold-body{max-width:72ch}
+.mrow p{font-size:.99rem;color:var(--muted);margin-top:2px}
+
+/* ---------- compact glossary ---------- */
+.gterms{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px}
+.gterm{display:flex;align-items:center;gap:10px;width:100%;text-align:left;font:inherit;color:inherit;
+  background:var(--surface);border:1.5px solid var(--line);border-radius:var(--r-sm);padding:13px 16px;cursor:pointer;
+  transition:border-color var(--dur),background var(--dur),transform var(--dur) var(--ease)}
+.gterm:hover{border-color:var(--accent);transform:translateY(-1px)}
+.gterm[aria-pressed="true"]{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,var(--surface));
+  box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 26%,transparent)}
+.gterm .t{font-weight:800;font-size:1.0rem;display:flex;align-items:center;gap:8px;flex-wrap:wrap;flex:1 1 auto;min-width:0}
+.gterm .ab{font-family:var(--mono);font-size:.79rem;padding:1px 7px;border-radius:5px;background:var(--surface-2);
+  border:1px solid var(--line);color:var(--muted);font-weight:600}
+.gterm .tg{font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--faint);flex:0 0 auto}
+.gcount{font-size:.87rem;color:var(--faint);font-weight:700;margin:16px 0 12px}
+/* the definition always lands in the same place, so the list below never reflows */
+.gdef{display:none;margin:0 0 18px;padding:20px 22px;border-radius:var(--r);background:var(--surface);
+  border:2px solid var(--line);border-left:6px solid var(--accent);box-shadow:var(--shadow);max-width:74ch}
+.gdef.on{display:block;animation:pop .28s var(--ease)}
+.gdef h3{font-size:1.26rem;letter-spacing:-.025em;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.gdef .ab{font-family:var(--mono);font-size:.85rem;padding:2px 9px;border-radius:6px;background:var(--surface-2);
+  border:1px solid var(--line);color:var(--muted);font-weight:600}
+.gdef .tg{font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--faint)}
+.gdef p{font-size:1.06rem;color:var(--muted);line-height:1.66;margin-top:10px}
+.gdef .hintline{font-size:.87rem;color:var(--faint);margin-top:14px}
+@media(max-width:640px){.gterm .tg{display:none}}
 </style>
 <script>
 /* Runs before first paint, for two reasons.
@@ -696,19 +751,36 @@ html.js main>section[id].show,html.js main>.hero.show{display:block}
     <span class="eyebrow">02 &middot; Before you touch anything</span>
     <h2 class="sec">Biosafety, in five minutes.</h2>
     <p class="sec-sub">Read this bit properly. Most of the lab is routine, but a few organisms genuinely bite &mdash; and the bench clue that should stop you is not obvious.</p>
-    <div class="grid" id="bslGrid" style="margin-top:26px;gap:12px"></div>
-    <div class="foldbar"><button class="btn ghost" id="bslAll">Open all four levels</button><span class="hint">Or open just the one you need.</span></div>
-    <div class="danger" style="margin-top:16px">
-      <h3>Stop-work organisms</h3>
-      <p class="sec-sub" style="margin-top:4px">These are the leading causes of laboratory-acquired infection. If anything below fits, close the plate and find a supervisor &mdash; do not keep working it on the open bench.</p>
-      <div class="sent" id="sentinelList"></div>
+    <nav class="subtabs" id="safetyTabs" role="tablist" aria-label="Biosafety topics">
+      <button role="tab" id="st-levels" aria-controls="sp-levels" aria-selected="true">The four levels</button>
+      <button role="tab" id="st-stop" aria-controls="sp-stop" aria-selected="false">Stop-work organisms</button>
+      <button role="tab" id="st-rules" aria-controls="sp-rules" aria-selected="false">Non-negotiables</button>
+      <button role="tab" id="st-ppe" aria-controls="sp-ppe" aria-selected="false">PPE &amp; spills</button>
+    </nav>
+
+    <div class="subpanel on" id="sp-levels" role="tabpanel" aria-labelledby="st-levels">
+      <p class="panel-lede">Four containment levels exist; you will spend the whole day inside the second one. Open a level to see what is worked there and how.</p>
+      <div class="grid" id="bslGrid" style="gap:12px"></div>
+      <div class="foldbar"><button class="btn ghost" id="bslAll">Open all four levels</button><span class="hint">Or open just the one you need.</span></div>
     </div>
-    <h3 class="sec" style="font-size:1.05rem;margin-top:22px">The non-negotiables</h3>
-    <div class="rules" id="ruleGrid"></div>
-    <div class="grid g2" style="margin-top:16px">
-      <div class="card"><h4 style="font-size:.98rem">What you wear, and when</h4><div class="twrap" style="margin-top:10px;box-shadow:none">
-        <table class="tt"><thead><tr><th>Item</th><th>When</th><th>Note</th></tr></thead><tbody id="ppeBody"></tbody></table></div></div>
-      <div class="card"><h4 style="font-size:.98rem">If something spills</h4><ol class="steps" id="spillList"></ol></div>
+
+    <div class="subpanel" id="sp-stop" role="tabpanel" aria-labelledby="st-stop">
+      <p class="panel-lede">These are the leading causes of laboratory-acquired infection. If anything below fits, close the plate and find a supervisor &mdash; do not keep working it on the open bench.</p>
+      <div class="danger"><div class="sent" id="sentinelList"></div></div>
+    </div>
+
+    <div class="subpanel" id="sp-rules" role="tabpanel" aria-labelledby="st-rules">
+      <p class="panel-lede">Eight rules with no exceptions. Each one exists because somebody was infected by breaking it.</p>
+      <div class="rules" id="ruleGrid"></div>
+    </div>
+
+    <div class="subpanel" id="sp-ppe" role="tabpanel" aria-labelledby="st-ppe">
+      <p class="panel-lede">What to wear, and what to do in the first two minutes after something breaks.</p>
+      <div class="grid g2" style="align-items:start">
+        <div class="card"><h4 style="font-size:1.09rem">What you wear, and when</h4><div class="twrap" style="margin-top:12px;box-shadow:none">
+          <table class="tt"><thead><tr><th>Item</th><th>When</th><th>Note</th></tr></thead><tbody id="ppeBody"></tbody></table></div></div>
+        <div class="card"><h4 style="font-size:1.09rem">If something spills</h4><ol class="steps" id="spillList"></ol></div>
+      </div>
     </div>
   </section>
 
@@ -733,7 +805,7 @@ html.js main>section[id].show,html.js main>.hero.show{display:block}
     <h2 class="sec">How we actually test.</h2>
     <p class="sec-sub">From a 60-second Gram stain to a multiplex panel. Filter by family.</p>
     <div class="fchips" id="fchips" style="margin-top:16px"></div>
-    <div class="grid g2" id="methodGrid"></div>
+    <div class="mlist" id="methodGrid"></div>
   </section>
 
 
@@ -847,15 +919,35 @@ html.js main>section[id].show,html.js main>.hero.show{display:block}
     <span class="eyebrow">09 &middot; Reading it back</span>
     <h2 class="sec">What the report actually says.</h2>
     <p class="sec-sub">A micro report evolves over days, and half its sentences are lab dialect. Here is how to read each stage &mdash; and the phrases people misread most.</p>
-    <div class="grid" id="stageGrid" style="margin-top:26px;gap:12px"></div>
-    <h3 class="sec" style="font-size:1.05rem;margin-top:22px">The four interpretive categories</h3>
-    <div class="sirgrid" id="sirGrid"></div>
-    <h3 class="sec" style="font-size:1.05rem;margin-top:22px">Lab dialect, translated</h3>
-    <div class="twrap"><table class="tt"><thead><tr><th>What the report says</th><th>What it means</th><th>What you do</th></tr></thead><tbody id="phraseBody"></tbody></table></div>
-    <h3 class="sec" style="font-size:1.05rem;margin-top:22px">Called to you immediately</h3>
-    <div class="twrap"><table class="tt"><thead><tr><th>Finding</th><th>Why it is critical</th><th>Action</th></tr></thead><tbody id="criticalBody"></tbody></table></div>
-    <h3 class="sec" style="font-size:1.05rem;margin-top:22px">When do I get my result?</h3>
-    <div class="twrap"><table class="tt"><thead><tr><th>Test</th><th>Typical</th><th>Note</th></tr></thead><tbody id="taBody"></tbody></table></div>
+    <nav class="subtabs" id="reportTabs" role="tablist" aria-label="Report topics">
+      <button role="tab" id="rt-stages" aria-controls="rp-stages" aria-selected="true">The four stages</button>
+      <button role="tab" id="rt-sir" aria-controls="rp-sir" aria-selected="false">S, I and R</button>
+      <button role="tab" id="rt-dialect" aria-controls="rp-dialect" aria-selected="false">Lab dialect</button>
+      <button role="tab" id="rt-urgent" aria-controls="rp-urgent" aria-selected="false">Urgent &amp; timing</button>
+    </nav>
+
+    <div class="subpanel on" id="rp-stages" role="tabpanel" aria-labelledby="rt-stages">
+      <p class="panel-lede">A micro report is not one document, it is four. Open a stage to see what it says, what it means, and the trap in it.</p>
+      <div class="grid" id="stageGrid" style="gap:12px"></div>
+    </div>
+
+    <div class="subpanel" id="rp-sir" role="tabpanel" aria-labelledby="rt-sir">
+      <p class="panel-lede">The letter beside each antibiotic is an interpretation, not a measurement. Here is what each one is actually claiming.</p>
+      <div class="sirgrid" id="sirGrid"></div>
+    </div>
+
+    <div class="subpanel" id="rp-dialect" role="tabpanel" aria-labelledby="rt-dialect">
+      <p class="panel-lede">Eight phrases that mean something different to the lab than they sound like on the ward.</p>
+      <div class="twrap"><table class="tt"><thead><tr><th>What the report says</th><th>What it means</th><th>What you do</th></tr></thead><tbody id="phraseBody"></tbody></table></div>
+    </div>
+
+    <div class="subpanel" id="rp-urgent" role="tabpanel" aria-labelledby="rt-urgent">
+      <p class="panel-lede">What gets phoned to you the moment it is seen, and how long everything else takes.</p>
+      <h3 class="sec" style="font-size:1.16rem">Called to you immediately</h3>
+      <div class="twrap" style="margin-top:12px"><table class="tt"><thead><tr><th>Finding</th><th>Why it is critical</th><th>Action</th></tr></thead><tbody id="criticalBody"></tbody></table></div>
+      <h3 class="sec" style="font-size:1.16rem;margin-top:26px">When do I get my result?</h3>
+      <div class="twrap" style="margin-top:12px"><table class="tt"><thead><tr><th>Test</th><th>Typical</th><th>Note</th></tr></thead><tbody id="taBody"></tbody></table></div>
+    </div>
   </section>
 
   <section id="cards" class="wrap">
@@ -895,6 +987,8 @@ html.js main>section[id].show,html.js main>.hero.show{display:block}
       <input type="search" id="gq" placeholder="Search terms &mdash; catalase, MIC, MacConkey, sentinel..." aria-label="Search the glossary" />
     </div>
     <div class="fchips" id="gtags"></div>
+    <p class="gcount" id="gcount" role="status"></p>
+    <div class="gdef" id="gdef" role="region" aria-live="polite" aria-label="Definition"></div>
     <div class="gterms" id="gterms"></div>
   </section>
 
@@ -902,13 +996,27 @@ html.js main>section[id].show,html.js main>.hero.show{display:block}
     <span class="eyebrow">14 &middot; Before you go</span>
     <h2 class="sec">What to take with you.</h2>
     <p class="sec-sub">If the rest of today fades, these are the bits that should not.</p>
-    <div class="grid g2" style="margin-top:16px;align-items:start">
+    <nav class="subtabs" id="recapTabs" role="tablist" aria-label="Recap topics">
+      <button role="tab" id="ct-take" aria-controls="cp-take" aria-selected="true">The fourteen</button>
+      <button role="tab" id="ct-say" aria-controls="cp-say" aria-selected="false">Say this tomorrow</button>
+      <button role="tab" id="ct-ask" aria-controls="cp-ask" aria-selected="false">Ask this</button>
+    </nav>
+
+    <div class="subpanel on" id="cp-take" role="tabpanel" aria-labelledby="ct-take">
+      <p class="panel-lede">Fourteen things worth keeping. Everything else today was context for these.</p>
       <ol class="take" id="takeList"></ol>
-      <div style="display:flex;flex-direction:column;gap:14px">
-        <div class="card"><h4 style="font-size:.98rem">Things you can say tomorrow</h4><ul class="saylist" id="sayList"></ul></div>
-        <div class="card"><h4 style="font-size:.98rem">Good questions to ask</h4><ul class="asklist" id="askList"></ul></div>
-      </div>
     </div>
+
+    <div class="subpanel" id="cp-say" role="tabpanel" aria-labelledby="ct-say">
+      <p class="panel-lede">Six sentences that will make you sound like you have stood at the bench &mdash; because you have.</p>
+      <div class="card"><ul class="saylist" id="sayList"></ul></div>
+    </div>
+
+    <div class="subpanel" id="cp-ask" role="tabpanel" aria-labelledby="ct-ask">
+      <p class="panel-lede">Six questions the lab will be glad you asked.</p>
+      <div class="card"><ul class="asklist" id="askList"></ul></div>
+    </div>
+
     <div class="closing"><p id="closeTxt"></p></div>
   </section>
 </main>
@@ -994,9 +1102,9 @@ function renderBenches(){
       <div class="bhead" style="--c:var(--${b.key})"><div><h3>${esc(b.name)}</h3><p>${esc(b.specimen)}</p></div></div>
       <div class="bbody" style="--c:var(--${b.key})">
         <div class="bcol"><h4>Media set up</h4><ul class="blist" style="--c:var(--${b.key})">${(b.media||[]).map(m=>`<li>${esc(m)}</li>`).join('')}</ul>
-          <h4 style="margin-top:12px">Incubation</h4><p style="font-size:.85rem;color:var(--muted)">${esc(b.incubation)}</p></div>
+          <h4 style="margin-top:12px">Incubation</h4><p style="font-size:.97rem;color:var(--muted)">${esc(b.incubation)}</p></div>
         <div class="bcol"><h4>What we look for</h4><ul class="blist" style="--c:var(--${b.key})">${(b.lookFor||[]).map(m=>`<li>${esc(m)}</li>`).join('')}</ul>
-          <h4 style="margin-top:12px">Reporting</h4><p style="font-size:.85rem;color:var(--muted)">${esc(b.reporting)}</p></div>
+          <h4 style="margin-top:12px">Reporting</h4><p style="font-size:.97rem;color:var(--muted)">${esc(b.reporting)}</p></div>
         <div class="bcol" style="grid-column:1/-1"><h4>Common isolates</h4>
           ${(b.organisms||[]).map(o=>`<div class="orgrow"><b>${esc(o.name)}</b><span>${esc(o.note)}</span></div>`).join('')}</div>
         <div class="warn"><span><b>Classic trap — </b>${esc(b.pitfall)}</span></div>
@@ -1015,13 +1123,19 @@ function renderBenches(){
 /* ---------- methods ---------- */
 function renderMethods(f){
   const ms=(DATA.methods||[]).filter(m=>!f||f==='all'||m.family===f);
-  $('#methodGrid').innerHTML=ms.map(m=>`
-    <article class="mcard" style="--c:var(--${FAM[m.family]||'accent'})">
-      <div class="mfam">${esc(m.family)}</div>
-      <h4>${esc(m.name)}</h4><p>${esc(m.what)}</p>
-      <div class="mmeta"><span class="t">${esc(m.speed)}</span><span>${esc(m.example)}</span></div>
-      <div class="mcatch"><b>Catch:</b> ${esc(m.catch)}</div>
+  $('#methodGrid').innerHTML=ms.map((m,i)=>`
+    <article class="mrow fold${i===0?' open':''}" style="--c:var(--${FAM[m.family]||'accent'})">
+      <button class="fold-top" aria-expanded="${i===0}">
+        <div><div class="mfam">${esc(m.family)}</div><h4>${esc(m.name)}</h4></div>
+        <span class="caret" aria-hidden="true">+</span>
+      </button>
+      <div class="fold-body">
+        <p>${esc(m.what)}</p>
+        <div class="mmeta"><span class="t">${esc(m.speed)}</span><span>${esc(m.example)}</span></div>
+        <div class="mcatch"><b>Catch:</b> ${esc(m.catch)}</div>
+      </div>
     </article>`).join('');
+  wireFolds('#methodGrid');
 }
 function renderFilters(){
   const fams=['all','conventional','rapid','automated','molecular'];
@@ -1048,16 +1162,16 @@ let gI=0,gScore=0,gDone=false;
 function renderGame(){
   const items=DATA.benchGame||[]; const it=items[gI];
   const el=$('#gameBox');
-  if(!it){el.innerHTML=`<h3 style="font-size:1.1rem">Nice work — ${gScore} / ${items.length} routed correctly.</h3>
+  if(!it){el.innerHTML=`<h3 style="font-size:1.21rem">Nice work — ${gScore} / ${items.length} routed correctly.</h3>
     <div class="gbar"><button class="btn" id="greset">Play again</button></div>`;
     $('#greset').onclick=()=>{gI=0;gScore=0;gDone=false;renderGame();};return;}
   const benches=['urine','respiratory','blood','stool','wound','sterile'];
-  el.innerHTML=`<div class="qn" style="font-family:var(--mono);font-size:.72rem;color:var(--faint);font-weight:700">SPECIMEN ${gI+1} OF ${items.length}</div>
+  el.innerHTML=`<div class="qn" style="font-family:var(--mono);font-size:.81rem;color:var(--faint);font-weight:700">SPECIMEN ${gI+1} OF ${items.length}</div>
     <p class="gspec">${esc(it.specimen)}</p>
     <div class="gopts">${benches.map(b=>`<button class="gopt" style="--c:var(--${b})" data-b="${b}">${BENCHNAME[b]}</button>`).join('')}</div>
     <div class="gfb" id="gfb"></div>
     <div class="gbar"><div class="gprog"><i style="width:${(gI/items.length)*100}%"></i></div>
-      <span style="font-size:.8rem;font-weight:700;color:var(--muted)">${gScore} correct</span>
+      <span style="font-size:.92rem;font-weight:700;color:var(--muted)">${gScore} correct</span>
       <button class="btn ghost" id="gnext" style="display:none">Next specimen</button></div>`;
   $$('#gameBox .gopt').forEach(b=>b.onclick=()=>{
     if(gDone)return; gDone=true;
@@ -1263,6 +1377,33 @@ function renderGallery(){
 }
 
 
+/* ---------- sub-tabs: one panel of a chapter at a time ---------- */
+function wireSubtabs(navSel){
+  const nav=$(navSel); if(!nav) return;
+  const tabs=$$(navSel+' [role="tab"]');
+  const show=i=>{
+    tabs.forEach((t,j)=>{
+      const on=j===i;
+      t.setAttribute('aria-selected',String(on));
+      t.tabIndex=on?0:-1;
+      const p=document.getElementById(t.getAttribute('aria-controls'));
+      if(p) p.classList.toggle('on',on);
+    });
+  };
+  tabs.forEach((t,i)=>{
+    t.tabIndex=i===0?0:-1;
+    t.onclick=()=>show(i);
+    t.onkeydown=e=>{
+      const n=tabs.length; let k=null;
+      if(e.key==='ArrowRight') k=(i+1)%n;
+      else if(e.key==='ArrowLeft') k=(i-1+n)%n;
+      else if(e.key==='Home') k=0;
+      else if(e.key==='End') k=n-1;
+      if(k===null) return;
+      e.preventDefault(); show(k); tabs[k].focus();
+    };
+  });
+}
 /* ---------- folding cards ---------- */
 const FOLDBARS={};
 function syncFoldBar(gridSel){
@@ -1355,15 +1496,33 @@ function renderReport(){
 /* ---------- glossary ---------- */
 let gTag='all';
 function renderGloss(){
-  const q=($('#gq')?.value||'').trim().toLowerCase();
+  const raw=($('#gq')?.value||'').trim(), q=raw.toLowerCase();
   const items=(GLOSS||[]).filter(t=>(gTag==='all'||t.tag===gTag) &&
     (!q||(t.term+' '+(t.abbr||'')+' '+t.def).toLowerCase().includes(q)))
     .sort((a,b)=>a.term.localeCompare(b.term));
-  const el=$('#gterms');
-  el.innerHTML=items.length?items.map(t=>`
-    <div class="gterm"><div class="t">${esc(t.term)}${t.abbr?`<span class="ab">${esc(t.abbr)}</span>`:''}</div>
-      <div class="d">${esc(t.def)}</div><span class="tg">${esc(t.tag||'')}</span></div>`).join('')
+  const el=$('#gterms'), cnt=$('#gcount');
+  if(cnt) cnt.textContent=items.length
+    ? `${items.length} of ${(GLOSS||[]).length} terms${raw?` matching \u201c${esc(raw)}\u201d`:''} \u00b7 tap any to read it`
+    : '';
+  el.innerHTML=items.length?items.map((t,i)=>`
+    <button class="gterm" data-i="${i}" aria-pressed="false">
+      <span class="t">${esc(t.term)}${t.abbr?`<span class="ab">${esc(t.abbr)}</span>`:''}</span>
+      <span class="tg">${esc(t.tag||'')}</span>
+    </button>`).join('')
     :`<div class="gempty">Nothing matches &ldquo;${esc(q)}&rdquo;.</div>`;
+  const def=$('#gdef');
+  if(def){ def.className='gdef'; def.innerHTML=''; }
+  $$('#gterms .gterm').forEach(b=>b.onclick=()=>{
+    const t=items[+b.dataset.i]; if(!t||!def) return;
+    const already=b.getAttribute('aria-pressed')==='true';
+    $$('#gterms .gterm').forEach(x=>x.setAttribute('aria-pressed','false'));
+    if(already){ def.className='gdef'; def.innerHTML=''; return; }
+    b.setAttribute('aria-pressed','true');
+    def.innerHTML=`<h3>${esc(t.term)}${t.abbr?`<span class="ab">${esc(t.abbr)}</span>`:''}`+
+      `${t.tag?`<span class="tg">${esc(t.tag)}</span>`:''}</h3><p>${esc(t.def)}</p>`+
+      `<p class="hintline">Tap the term again to close, or pick another.</p>`;
+    def.className='gdef on';
+  });
 }
 function renderGlossTags(){
   const tags=['all',...[...new Set((GLOSS||[]).map(t=>t.tag).filter(Boolean))].sort()];
@@ -1461,7 +1620,7 @@ function initChapters(){
 }
 
 renderStats();renderDisciplines();renderJourney();renderBenches();renderFilters();renderMethods('all');
-renderSafety();renderReport();renderGlossTags();renderGloss();renderRecap();renderTreeChips();renderTree();renderCards();renderGallery();renderGame();renderQuiz();
+renderSafety();renderReport();renderGlossTags();renderGloss();renderRecap();renderTreeChips();renderTree();renderCards();renderGallery();renderGame();renderQuiz();wireSubtabs('#safetyTabs');wireSubtabs('#reportTabs');wireSubtabs('#recapTabs');
 /* If anything above threw, the chapters were never shown; drop the js class so the
    reader gets the whole document rather than a blank page. */
 try{ initChapters(); }
