@@ -12,20 +12,18 @@ A **fun, compact, interactive** one-day orientation to the hospital clinical mic
 
 ## How it is organised
 
-Lab Day is a **slide deck**, not a dashboard. One idea per screen, advanced with a
-single Next button (or the arrow keys). There are exactly four controls on screen at
-any time: Contents, the theme toggle, Back and Next. 141 slides across 15 chapters,
-with a Contents overlay to jump between them and shareable per-slide URLs (`#s42`).
+Lab Day is a **slide deck separated into tabs**. Twelve chapter tabs across the top;
+within a chapter you page through slides with Back/Next or the arrow keys. One idea
+per screen — the counter reads "4 of 13 · Biosafety", not "17 of 141". Next at the
+end of a chapter carries you into the next one, and the tab highlight follows.
 
-`Welcome · Specialties · Biosafety · The journey · The benches · How we test ·
-Algorithms · Watch · Through the scope · The report · Flashcards · Which bench? ·
-Quiz · Glossary · Recap`
+`Welcome · Specialties · Biosafety · Journey · Benches · Testing · Algorithms ·
+See it · Report · Practice · Glossary · Recap`
 
-Everything that used to be shown at once — ten chapter tabs, three segmented
-controls, two accordions, filter chips and a pip strip — is gone. Each biosafety
-level, each bench, each test method, each report stage, each flashcard and each quiz
-question now has a screen of its own. The glossary stays a single searchable slide
-because that is what a dictionary is for.
+141 slides in total. Each biosafety level, bench, test method, algorithm, animation,
+photograph, report stage, flashcard, quiz question and take-home owns a screen. The
+glossary stays a single searchable slide, because that is what a dictionary is for.
+Per-slide URLs (`#s42`) are shareable and survive reload.
 
 ## Run it locally
 

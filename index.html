@@ -640,7 +640,7 @@ table.tt{width:100%;border-collapse:collapse;font-size:.96rem}
 body{min-height:100dvh}
 .bar{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--bg) 88%,transparent);
   backdrop-filter:blur(14px) saturate(1.6);border-bottom:1.5px solid var(--line)}
-.bar-in{max-width:1180px;margin:0 auto;padding:12px clamp(20px,4vw,40px);display:flex;align-items:center;gap:16px}
+.bar-in{max-width:1240px;margin:0 auto;padding:12px clamp(16px,2.2vw,28px);display:flex;align-items:center;gap:12px}
 .bar .chap{font-size:.87rem;font-weight:750;color:var(--muted);margin-left:auto;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .prog-track{height:2px;background:var(--line)}
@@ -729,6 +729,18 @@ body{min-height:100dvh}
 .toc-row:last-of-type{border-bottom:none}
 .toc-row:hover{color:var(--accent)}
 .toc-row small{margin-left:auto;font-family:var(--mono);font-size:.83rem;color:var(--faint);font-weight:600}
+
+/* ---------- chapter tabs above the deck ---------- */
+.tabs{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{font:inherit;font-size:.8rem;font-weight:750;padding:7px 9px;border-radius:99px;border:2px solid transparent;
+  background:none;color:var(--muted);white-space:nowrap;cursor:pointer;
+  transition:background var(--dur),color var(--dur),border-color var(--dur)}
+.tabs button:hover{color:var(--ink);background:var(--surface-2)}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.bar-in{flex-wrap:nowrap}
+.tabs{min-width:0;flex:1 1 auto}
+.bar .brand,.bar .tbtn{flex:0 0 auto}
 </style>
 <script>
 /* Runs before first paint, for two reasons.
@@ -761,8 +773,7 @@ body{min-height:100dvh}
       </svg>
       Lab Day
     </span>
-    <button class="toc-btn" id="tocBtn" aria-expanded="false" aria-controls="toc">Contents</button>
-    <span class="chap" id="chap"></span>
+    <nav class="tabs" id="tabs" role="tablist" aria-label="Chapters"></nav>
     <button class="tbtn" id="theme" aria-label="Toggle dark mode"><span class="sun">☀</span><span class="moon">☾</span></button>
   </div>
   <div class="prog-track"><div class="prog" id="prog"></div></div>
@@ -778,14 +789,6 @@ body{min-height:100dvh}
   </div>
 </nav>
 
-<div id="toc" hidden>
-  <div class="toc-panel" role="dialog" aria-modal="true" aria-label="Contents">
-    <h2>Contents</h2>
-    <div id="tocList"></div>
-    <div class="tbar" style="margin-top:18px"><button class="btn ghost" id="tocClose">Close</button></div>
-    <p class="toc-legal">&copy; 2026 <strong>Omar Z Baba, MD</strong>. All rights reserved. Educational orientation only &mdash; not a clinical protocol.</p>
-  </div>
-</div>
 
 <footer>
   <div class="wrap">
@@ -927,7 +930,7 @@ add('Welcome',()=>`
     <p class="s-lede">Today you get the tour that actually matters: what we do in here, how a
       specimen travels from the front bench to a final report, and what all those plates,
       strips, disks and instruments are really for.</p>
-    <p class="s-hint">${SL.length===0?'':''}Use <b>Next</b>, the arrow keys, or <b>Contents</b> to jump around.
+    <p class="s-hint">${SL.length===0?'':''}Use <b>Next</b> or the arrow keys to move through a chapter, and the tabs above to jump between them.
       ${'' /* count filled at runtime */}</p>
   </div>`);
 
@@ -983,9 +986,9 @@ add('Biosafety',()=>`
     `<li>${esc(x.what)}${x.note?` <span style="color:var(--faint)">&mdash; ${esc(x.note)}</span>`:''}</li>`).join('')}</ol>`);
 
 /* ---------- 4. the journey ---------- */
-add('The journey',chapterOpen('03','How a specimen travels.',
+add('Journey',chapterOpen('03','How a specimen travels.',
   'Seven steps from the moment it arrives at the front bench to the moment a result reaches you.'));
-(DATA.workflow||[]).forEach(s=>add('The journey',()=>`
+(DATA.workflow||[]).forEach(s=>add('Journey',()=>`
   <article class="s-card" style="--c:var(--virology)">
     <span class="s-kicker">Step ${esc(s.step)}</span>
     <h3>${esc(s.name)}</h3>
@@ -995,9 +998,9 @@ add('The journey',chapterOpen('03','How a specimen travels.',
   </article>`));
 
 /* ---------- 5. the benches ---------- */
-add('The benches',chapterOpen('04','Six benches.',
+add('Benches',chapterOpen('04','Six benches.',
   'Each bench has its own media, its own incubation, and its own idea of what counts as a real result.'));
-(DATA.benches||[]).forEach(b=>add('The benches',()=>`
+(DATA.benches||[]).forEach(b=>add('Benches',()=>`
   <article class="s-card" style="--c:var(--${b.key})">
     <span class="s-kicker">${esc(b.name)}</span>
     <h3>${esc(b.specimen)}</h3>
@@ -1013,9 +1016,9 @@ add('The benches',chapterOpen('04','Six benches.',
   </article>`,{wide:true}));
 
 /* ---------- 6. how we test ---------- */
-add('How we test',chapterOpen('05','The toolbox.',
+add('Testing',chapterOpen('05','The toolbox.',
   'Fourteen ways to put a name on an organism, from a sixty-second Gram stain to a multiplex panel.'));
-(DATA.methods||[]).forEach(m=>add('How we test',()=>`
+(DATA.methods||[]).forEach(m=>add('Testing',()=>`
   <article class="s-card" style="--c:var(--${FAM[m.family]||'accent'})">
     <span class="s-kicker">${esc(m.family)}</span>
     <h3>${esc(m.name)}</h3>
@@ -1032,14 +1035,14 @@ add('Algorithms',chapterOpen('06','You have a colony. Now what?',
   {wide:true,after:()=>drawTree(i)}));
 
 /* ---------- 8. watch it work ---------- */
-add('Watch',chapterOpen('07','Six things, animated.',
+add('See it',chapterOpen('07','Six things, animated.',
   'The bench processes that are far easier to see than to read about. These loop on their own.'));
-[0,1,2,3,4,5].forEach(i=>add('Watch',()=>`<div class="s-anim" data-anim="${i}"></div>`,{after:mountAnim}));
+[0,1,2,3,4,5].forEach(i=>add('See it',()=>`<div class="s-anim" data-anim="${i}"></div>`,{after:mountAnim}));
 
 /* ---------- 9. through the scope ---------- */
-add('Through the scope',chapterOpen('08','What it actually looks like.',
+add('See it',chapterOpen('08','What it actually looks like.',
   'Ten photographs from public repositories, each credited to its author and licence.'));
-(IMAGES||[]).forEach(im=>add('Through the scope',()=>{
+(IMAGES||[]).forEach(im=>add('See it',()=>{
   const c=SHOT_CAPTION[im.slug]||[im.label,''];
   const artist=(im.artist||'').replace(/^(No machine-readable author provided\.?|Unknown author\s*)+/i,'').trim();
   const credit=[artist&&artist.slice(0,60),'Wikimedia Commons',esc(im.license)].filter(Boolean).join(' &middot; ');
@@ -1050,9 +1053,9 @@ add('Through the scope',chapterOpen('08','What it actually looks like.',
     </figcaption></figure>`;},{wide:true}));
 
 /* ---------- 10. the report ---------- */
-add('The report',chapterOpen('09','What the report actually says.',
+add('Report',chapterOpen('09','What the report actually says.',
   'A micro report is not one document, it is four — and half its sentences are lab dialect.'));
-(REPORT.stages||[]).forEach((x,i)=>add('The report',()=>`
+(REPORT.stages||[]).forEach((x,i)=>add('Report',()=>`
   <article class="s-card" style="--c:var(--${STC[i]||'accent'})">
     <span class="s-kicker">${esc(x.when)}</span>
     <h3>${esc(x.title)}</h3>
@@ -1060,7 +1063,7 @@ add('The report',chapterOpen('09','What the report actually says.',
     <p class="s-body"><b>Means:</b> ${esc(x.means)}</p>
     <div class="trap"><b>Trap &mdash; </b>${esc(x.trap)}</div>
   </article>`));
-add('The report',()=>{
+add('Report',()=>{
   const sc={S:'parasitology',I:'mycology',R:'bacteriology',NR:'molecular'};
   const key=c=>(String(c||'').trim().match(/^[A-Z]+/)||[''])[0];
   return `<h3 class="s-h">The four interpretive categories</h3>
@@ -1068,23 +1071,23 @@ add('The report',()=>{
       <div class="sircard" style="--c:var(--${sc[key(x.code)]||'molecular'})">
         <div class="code">${esc(x.code)}</div><div class="lab">${esc(x.label)}</div>
         <div class="mn">${esc(x.means)}</div><div class="cv">${esc(x.caveat)}</div></div>`).join('')}</div>`;},{wide:true});
-add('The report',()=>`
+add('Report',()=>`
   <h3 class="s-h">Lab dialect, translated</h3>
   <div class="twrap"><table class="tt"><thead><tr><th>What the report says</th><th>What it means</th><th>What you do</th></tr></thead>
     <tbody>${(REPORT.phrases||[]).map(p=>`<tr><td><code>${esc(p.phrase)}</code></td><td>${esc(p.means)}</td><td>${esc(p.action)}</td></tr>`).join('')}</tbody></table></div>`,{wide:true});
-add('The report',()=>`
+add('Report',()=>`
   <h3 class="s-h">Called to you immediately</h3>
   <div class="twrap"><table class="tt"><thead><tr><th>Finding</th><th>Why it is critical</th><th>Action</th></tr></thead>
     <tbody>${(REPORT.critical||[]).map(c=>`<tr><td><b>${esc(c.finding)}</b></td><td>${esc(c.why)}</td><td>${esc(c.action)}</td></tr>`).join('')}</tbody></table></div>`,{wide:true});
-add('The report',()=>`
+add('Report',()=>`
   <h3 class="s-h">When do I get my result?</h3>
   <div class="twrap"><table class="tt"><thead><tr><th>Test</th><th>Typical</th><th>Note</th></tr></thead>
     <tbody>${(REPORT.turnaround||[]).map(t=>`<tr><td><b>${esc(t.test)}</b></td><td><code>${esc(t.typical)}</code></td><td>${esc(t.note)}</td></tr>`).join('')}</tbody></table></div>`,{wide:true});
 
 /* ---------- 11. flashcards ---------- */
-add('Flashcards',chapterOpen('10','Sixteen organisms.',
+add('Practice',chapterOpen('10','Sixteen organisms.',
   'Tap the card to turn it over. No score, no timer — just the ones worth recognising.'));
-(DATA.flashcards||[]).forEach(c=>add('Flashcards',()=>`
+(DATA.flashcards||[]).forEach(c=>add('Practice',()=>`
   <button class="s-flip" style="--c:var(--${c.discipline||'accent'})" aria-pressed="false">
     <span class="s-flip-front"><span class="gtag">${esc(c.gram)}</span><b>${esc(c.name)}</b><small>${esc(c.source)}</small>
       <span class="s-flip-hint">Tap to turn over</span></span>
@@ -1094,21 +1097,21 @@ add('Flashcards',chapterOpen('10','Sixteen organisms.',
     b.onclick=()=>b.setAttribute('aria-pressed',String(b.classList.toggle('on')));}}));
 
 /* ---------- 12. which bench? ---------- */
-add('Which bench?',chapterOpen('11','Route the specimen.',
+add('Practice',chapterOpen('11','Route the specimen.',
   'Ten specimens arrive at the front bench. Send each one to the right place.'));
-add('Which bench?',()=>`<div class="game" id="gameBox"></div>`,{after:()=>{gI=0;gScore=0;gDone=false;drawGame();}});
+add('Practice',()=>`<div class="game" id="gameBox"></div>`,{after:()=>{gI=0;gScore=0;gDone=false;drawGame();}});
 
 /* ---------- 13. quiz ---------- */
-add('Quiz',chapterOpen('12','Twelve quick questions.',
+add('Practice',chapterOpen('12','Twelve quick questions.',
   'Instant feedback and a pearl on every one. Nothing is recorded — this is just for you.'));
-(DATA.quiz||[]).forEach((q,i)=>add('Quiz',()=>`
+(DATA.quiz||[]).forEach((q,i)=>add('Practice',()=>`
   <article class="q s-q" data-i="${i}">
     <div class="qn">Question ${i+1} of ${(DATA.quiz||[]).length}</div>
     <p class="qs">${esc(q.stem)}</p>
     <div class="qo">${q.opts.map((o,j)=>`<button class="opt" data-j="${j}"><span class="key">${KEYS[j]}</span><span>${esc(o)}</span></button>`).join('')}</div>
     <div class="qex"></div>
   </article>`,{after:st=>wireQuiz(st,i)}));
-add('Quiz',()=>{
+add('Practice',()=>{
   const n=(DATA.quiz||[]).length, pct=n?Math.round(qScore/n*100):0;
   const line=qAnswered<n?'You skipped a few — that is fine, the explanations are the point.'
     :pct===100?'Every one. Go and ask the bench something hard.'
@@ -1119,7 +1122,7 @@ add('Quiz',()=>{
     <p class="s-lede">${esc(line)}</p>
     <div class="tbar"><button class="btn ghost" id="qreset">Start the quiz over</button></div></div>`;},
   {after:st=>{const b=st.querySelector('#qreset'); if(b) b.onclick=()=>{
-    qScore=0;qAnswered=0;qState={};go(SL.findIndex(s=>s.ch==='Quiz')+1);};}});
+    qScore=0;qAnswered=0;qState={};go(SL.findIndex(s=>s.html.toString().indexOf('class="q s-q"')>0));};}});
 
 /* ---------- 14. glossary ---------- */
 add('Glossary',()=>`
@@ -1309,8 +1312,11 @@ function go(i,push){
   stage.className='stage'+(s.wide?' wide':'');
   stage.innerHTML=s.html();
   if(s.after) s.after(stage);
-  $('#chap').textContent=s.ch;
-  $('#pos').textContent=(cur+1)+' / '+SL.length;
+  const ti=tabOf(cur), t=TABS[ti];
+  $('#pos').textContent=(cur-t.start+1)+' of '+t.n+' \u00b7 '+t.ch;
+  $$('#tabs button').forEach((b,j)=>{b.setAttribute('aria-selected',String(j===ti));b.tabIndex=j===ti?0:-1;});
+  const at=$(`#tabs button[data-i="${ti}"]`);
+  if(at&&at.scrollIntoView) at.scrollIntoView({block:'nearest',inline:'nearest'});
   $('#prog').style.width=((cur+1)/SL.length*100).toFixed(2)+'%';
   $('#prev').disabled=cur===0;
   $('#next').disabled=cur===SL.length-1;
@@ -1319,28 +1325,36 @@ function go(i,push){
   window.scrollTo(0,0);
   stage.focus({preventScroll:true});
 }
-function buildToc(){
-  const seen={}, out=[];
-  SL.forEach((s,i)=>{ if(!(s.ch in seen)){ seen[s.ch]=i; out.push({ch:s.ch,i}); } });
-  $('#tocList').innerHTML=out.map(o=>
-    `<button class="toc-row" data-i="${o.i}"><span>${esc(o.ch)}</span><small>${o.i+1}</small></button>`).join('');
-  $$('#tocList .toc-row').forEach(b=>b.onclick=()=>{ closeToc(); go(+b.dataset.i); });
+/* the chapters, derived from the slides themselves */
+const TABS=(()=>{ const seen={}, out=[];
+  SL.forEach((s,i)=>{ if(!(s.ch in seen)){ seen[s.ch]=out.length; out.push({ch:s.ch,start:i,n:0}); }
+    out[seen[s.ch]].n++; });
+  return out; })();
+const tabOf=i=>{ let k=0; for(let t=0;t<TABS.length;t++) if(i>=TABS[t].start) k=t; return k; };
+function buildTabs(){
+  $('#tabs').innerHTML=TABS.map((t,i)=>
+    `<button role="tab" id="tab-${i}" aria-selected="${i===0}" tabindex="${i===0?0:-1}" data-i="${i}">${esc(t.ch)}</button>`).join('');
+  $$('#tabs button').forEach(b=>{
+    b.onclick=()=>go(TABS[+b.dataset.i].start);
+    b.onkeydown=e=>{
+      const n=TABS.length; let k=null;
+      if(e.key==='ArrowRight') k=(+b.dataset.i+1)%n;
+      else if(e.key==='ArrowLeft') k=(+b.dataset.i-1+n)%n;
+      else if(e.key==='Home') k=0; else if(e.key==='End') k=n-1;
+      if(k===null) return;
+      e.preventDefault(); go(TABS[k].start);
+      const nb=$(`#tabs button[data-i="${k}"]`); if(nb) nb.focus();
+    };
+  });
 }
-function openToc(){ $('#toc').hidden=false; $('#tocBtn').setAttribute('aria-expanded','true');
-  const f=$('#tocList .toc-row'); if(f) f.focus(); }
-function closeToc(){ $('#toc').hidden=true; $('#tocBtn').setAttribute('aria-expanded','false'); $('#tocBtn').focus(); }
 
 function initDeck(){
-  buildToc();
+  buildTabs();
   $('#next').onclick=()=>go(cur+1);
   $('#prev').onclick=()=>go(cur-1);
-  $('#tocBtn').onclick=()=>$('#toc').hidden?openToc():closeToc();
-  $('#tocClose').onclick=closeToc;
-  $('#toc').addEventListener('click',e=>{ if(e.target.id==='toc') closeToc(); });
   document.addEventListener('keydown',e=>{
-    if(e.key==='Escape' && !$('#toc').hidden){ closeToc(); return; }
     const t=e.target, typing=t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA');
-    if(typing) return;
+    if(typing||t.getAttribute&&t.getAttribute('role')==='tab') return;
     if(e.key==='ArrowRight'||e.key==='PageDown'){ e.preventDefault(); go(cur+1); }
     else if(e.key==='ArrowLeft'||e.key==='PageUp'){ e.preventDefault(); go(cur-1); }
   });
