@@ -12,18 +12,22 @@ A **fun, compact, interactive** one-day orientation to the hospital clinical mic
 
 ## How it is organised
 
-Lab Day is a **slide deck separated into tabs**. Twelve chapter tabs across the top;
+Lab Day is a **slide deck separated into tabs**. Eleven chapter tabs across the top;
 within a chapter you page through slides with Back/Next or the arrow keys. One idea
-per screen — the counter reads "4 of 13 · Biosafety", not "17 of 141". Next at the
-end of a chapter carries you into the next one, and the tab highlight follows.
+per screen — the counter reads "4 of 10 · Biosafety", not "17 of 123".
 
 `Welcome · Specialties · Biosafety · Journey · Benches · Testing · Algorithms ·
-See it · Report · Practice · Glossary · Recap`
+Report · Practice · Glossary · Recap`
 
-141 slides in total. Each biosafety level, bench, test method, algorithm, animation,
-photograph, report stage, flashcard, quiz question and take-home owns a screen. The
-glossary stays a single searchable slide, because that is what a dictionary is for.
-Per-slide URLs (`#s42`) are shareable and survive reload.
+123 slides. There is no separate gallery: the six animations and ten photographs are
+embedded on the slides they illustrate — the Gram stain animation under the Gram
+stain method, the safety cabinet on BSL-2, the malaria smear on parasitology, the
+MacConkey plate on the urine bench.
+
+Organisms are **ID cards**: each of the 78 shows only the name until you flip it for
+what it means, so a specialty or a bench is a set of cards rather than a wall of
+prose. Rounded shapes are reserved for things you click; labels and tags are
+rectangles.
 
 ## Run it locally
 

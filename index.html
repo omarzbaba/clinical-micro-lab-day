@@ -647,9 +647,9 @@ body{min-height:100dvh}
 .prog{height:100%;width:0;background:var(--accent);transition:width .35s var(--ease)}
 
 .stage-wrap{min-height:calc(100dvh - 190px);display:flex;flex-direction:column;justify-content:center}
-.stage{width:100%;max-width:760px;margin:0 auto;padding:clamp(34px,5vh,64px) clamp(20px,4vw,40px);outline:none}
-.stage.wide{max-width:1120px}
-.stage>*{animation:slidein .34s var(--ease) both}
+#stage{width:100%;max-width:760px;margin:0 auto;padding:clamp(34px,5vh,64px) clamp(20px,4vw,40px);outline:none}
+#stage.wide{max-width:1120px}
+#stage>*{animation:slidein .34s var(--ease) both}
 @keyframes slidein{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
 .s-open{padding:clamp(20px,5vh,60px) 0}
@@ -741,6 +741,42 @@ body{min-height:100dvh}
 .bar-in{flex-wrap:nowrap}
 .tabs{min-width:0;flex:1 1 auto}
 .bar .brand,.bar .tbtn{flex:0 0 auto}
+
+/* ---------- media embedded in a content slide ---------- */
+.s-media{margin-top:24px;border-radius:var(--r);overflow:hidden;border:2px solid var(--line);background:var(--surface)}
+.s-media img{display:block;width:100%;height:auto}
+.s-media figcaption{padding:13px 16px;font-size:.95rem;color:var(--muted);line-height:1.55;border-top:2px solid var(--line)}
+.s-media figcaption b{color:var(--ink);font-weight:800}
+.s-media .cr{display:block;margin-top:6px;font-size:.83rem;color:var(--faint)}
+.s-media .cr a{color:inherit}
+.s-media .anim{margin:0;border:none;box-shadow:none;border-radius:0}
+.s-medialabel{display:block;margin-top:26px;margin-bottom:-14px;font-size:.83rem;font-weight:800;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--faint)}
+
+/* ---------- labels are rectangles; only controls stay rounded ---------- */
+.pillgrid{display:flex;flex-direction:column;gap:7px;margin-top:4px}
+.pill{display:block;font-size:.92rem;font-weight:600;padding:10px 14px;border-radius:9px;
+  background:var(--surface-2);border:1.5px solid var(--line);line-height:1.5}
+.pill.c{background:color-mix(in srgb,var(--c) 9%,var(--surface-2));border-color:color-mix(in srgb,var(--c) 28%,transparent)}
+.eyebrow{border-radius:10px}
+.gtag,.ttag,.tdetail .tag,.legend span,.crumb,.tlegend i{border-radius:7px}
+.sircard .code{border-radius:0}
+
+/* ---------- organism ID cards ---------- */
+.idgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:11px;margin-top:6px}
+.idcard{--c:var(--accent);position:relative;min-height:132px;perspective:1000px;cursor:pointer;
+  background:none;border:none;padding:0;font:inherit;color:inherit;text-align:left}
+.idface{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:6px;
+  padding:15px 16px;border-radius:11px;border:1.5px solid var(--line);background:var(--surface);
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform .5s var(--ease)}
+.idcard:hover .idface{border-color:color-mix(in srgb,var(--c) 45%,transparent)}
+.idfront b{font-size:1rem;font-style:italic;font-weight:800;line-height:1.25;letter-spacing:-.015em}
+.idfront .idhint{position:absolute;right:13px;bottom:11px;font-size:.75rem;font-weight:800;color:var(--faint)}
+.idback{transform:rotateY(180deg);background:color-mix(in srgb,var(--c) 9%,var(--surface));
+  border-color:color-mix(in srgb,var(--c) 30%,transparent);font-size:.92rem;color:var(--ink);line-height:1.5}
+.idcard.on .idfront{transform:rotateY(-180deg)}
+.idcard.on .idback{transform:rotateY(0)}
+@media(prefers-reduced-motion:reduce){.idface{transition:none}}
 </style>
 <script>
 /* Runs before first paint, for two reasons.
@@ -779,7 +815,7 @@ body{min-height:100dvh}
   <div class="prog-track"><div class="prog" id="prog"></div></div>
 </header>
 
-<div class="stage-wrap"><main class="stage" id="stage" tabindex="-1" aria-live="polite"></main></div>
+<div class="stage-wrap"><main id="stage" tabindex="-1" aria-live="polite"></main></div>
 
 <nav class="deck" aria-label="Slide navigation">
   <div class="deck-in">
@@ -943,13 +979,14 @@ add('Specialties',chapterOpen('01','Seven specialties, one lab.',
     <h3>${esc(d.tagline)}</h3>
     <p class="s-body">${esc(d.whatWeDo)}</p>
     <div class="s-cols">
-      <div><h4>Specimens</h4><div class="pills">${(d.specimens||[]).map(x=>`<span class="pill">${esc(x)}</span>`).join('')}</div></div>
-      <div><h4>How we test</h4><div class="pills">${(d.howWeTest||[]).map(x=>`<span class="pill c">${esc(x)}</span>`).join('')}</div></div>
+      <div><h4>Specimens</h4><div class="pillgrid">${(d.specimens||[]).map(x=>`<span class="pill">${esc(x)}</span>`).join('')}</div></div>
+      <div><h4>How we test</h4><div class="pillgrid">${(d.howWeTest||[]).map(x=>`<span class="pill c">${esc(x)}</span>`).join('')}</div></div>
     </div>
     <h4>Organisms to know</h4>
-    ${(d.organisms||[]).map(o=>`<div class="orgrow"><b>${esc(o.name)}</b><span>${esc(o.note)}</span></div>`).join('')}
+    ${idCards(d.organisms,d.key)}
     <div class="tip"><b>Remember:</b> ${esc(d.studentTip)}</div>
-  </article>`,{wide:true}));
+  </article>
+  ${mediaHtml('disc:'+d.key)}`,{wide:true,after:afterSlide}));
 
 /* ---------- 3. biosafety ---------- */
 add('Biosafety',chapterOpen('02','Before you touch anything.',
@@ -959,9 +996,10 @@ add('Biosafety',chapterOpen('02','Before you touch anything.',
     <span class="s-kicker">${esc(l.name)}</span>
     <h3>${esc(l.summary)}</h3>
     <p class="s-body">${esc(l.work)}</p>
-    <h4>Seen here</h4><div class="pills">${(l.examples||[]).map(x=>`<span class="pill">${esc(x)}</span>`).join('')}</div>
+    <h4>Seen here</h4><div class="pillgrid">${(l.examples||[]).map(x=>`<span class="pill">${esc(x)}</span>`).join('')}</div>
     <h4>Practices</h4><ul class="blist" style="--c:var(--${BSLC[i]||'accent'})">${(l.practices||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
-  </article>`,{wide:true}));
+  </article>
+  ${mediaHtml('bsl:'+i)}`,{wide:true,after:afterSlide}));
 add('Biosafety',()=>`
   <div class="danger">
     <h3>Stop-work organisms</h3>
@@ -995,7 +1033,8 @@ add('Journey',chapterOpen('03','How a specimen travels.',
     <p class="s-body">${esc(s.what)}</p>
     <div class="jwhy"><b>Why it matters &mdash; </b>${esc(s.why)}</div>
     <div class="jwatch"><b>Watch out &mdash; </b>${esc(s.watchOut)}</div>
-  </article>`));
+  </article>
+  ${mediaHtml('step:'+(s.step-1))}`,{wide:true,after:afterSlide}));
 
 /* ---------- 5. the benches ---------- */
 add('Benches',chapterOpen('04','Six benches.',
@@ -1009,11 +1048,12 @@ add('Benches',chapterOpen('04','Six benches.',
       <div><h4>What we look for</h4><ul class="blist" style="--c:var(--${b.key})">${(b.lookFor||[]).map(m=>`<li>${esc(m)}</li>`).join('')}</ul></div>
     </div>
     <h4>Common isolates</h4>
-    ${(b.organisms||[]).map(o=>`<div class="orgrow"><b>${esc(o.name)}</b><span>${esc(o.note)}</span></div>`).join('')}
+    ${idCards(b.organisms,b.key)}
     <div class="s-cols"><div><h4>Incubation</h4><p class="s-small">${esc(b.incubation)}</p></div>
       <div><h4>Reporting</h4><p class="s-small">${esc(b.reporting)}</p></div></div>
     <div class="warn"><span><b>Classic trap &mdash; </b>${esc(b.pitfall)}</span></div>
-  </article>`,{wide:true}));
+  </article>
+  ${mediaHtml('bench:'+b.key)}`,{wide:true,after:afterSlide}));
 
 /* ---------- 6. how we test ---------- */
 add('Testing',chapterOpen('05','The toolbox.',
@@ -1025,7 +1065,8 @@ add('Testing',chapterOpen('05','The toolbox.',
     <p class="s-body">${esc(m.what)}</p>
     <div class="mmeta"><span class="t">${esc(m.speed)}</span><span>${esc(m.example)}</span></div>
     <div class="mcatch"><b>Catch:</b> ${esc(m.catch)}</div>
-  </article>`));
+  </article>
+  ${mediaHtml('method:'+m.name)}`,{wide:true,after:afterSlide}));
 
 /* ---------- 7. algorithms ---------- */
 add('Algorithms',chapterOpen('06','You have a colony. Now what?',
@@ -1034,23 +1075,9 @@ add('Algorithms',chapterOpen('06','You have a colony. Now what?',
   <div class="tree" id="treeBox" style="--c:var(--${t.color||'accent'})" data-i="${i}"></div>`,
   {wide:true,after:()=>drawTree(i)}));
 
-/* ---------- 8. watch it work ---------- */
-add('See it',chapterOpen('07','Six things, animated.',
-  'The bench processes that are far easier to see than to read about. These loop on their own.'));
-[0,1,2,3,4,5].forEach(i=>add('See it',()=>`<div class="s-anim" data-anim="${i}"></div>`,{after:mountAnim}));
-
-/* ---------- 9. through the scope ---------- */
-add('See it',chapterOpen('08','What it actually looks like.',
-  'Ten photographs from public repositories, each credited to its author and licence.'));
-(IMAGES||[]).forEach(im=>add('See it',()=>{
-  const c=SHOT_CAPTION[im.slug]||[im.label,''];
-  const artist=(im.artist||'').replace(/^(No machine-readable author provided\.?|Unknown author\s*)+/i,'').trim();
-  const credit=[artist&&artist.slice(0,60),'Wikimedia Commons',esc(im.license)].filter(Boolean).join(' &middot; ');
-  return `<figure class="shot s-shot">
-    <img src="${esc(im.file)}" alt="${esc(c[0])}" loading="lazy" decoding="async" width="${im.w}" height="${im.h}" />
-    <figcaption><b>${esc(c[0])}</b>${c[1]}
-      <span class="cr">${credit} &middot; <a href="${esc(im.sourceUrl)}" target="_blank" rel="noopener noreferrer">source</a></span>
-    </figcaption></figure>`;},{wide:true}));
+/* ---------- 8 & 9. the media now live on the slides they illustrate ----------
+   The old "Watch it work" and "Through the scope" chapters were a gallery bolted on
+   the end. Every animation and photograph is placed by MEDIA_FOR instead. */
 
 /* ---------- 10. the report ---------- */
 add('Report',chapterOpen('09','What the report actually says.',
@@ -1153,6 +1180,68 @@ add('Recap',()=>`<div class="closing"><p>${esc(RECAP.close||'')}</p></div>`);
    slide helpers that need wiring
    ============================================================ */
 let gI=0,gScore=0,gDone=false,qScore=0,qAnswered=0,qState={},gTag='all',gTimer=null;
+
+
+/* ---------- media that belongs to a particular slide ----------
+   key -> {img:'<slug>'} or {anim:<index 0-5>}. Every one of the ten photographs and
+   all six animations is placed here, so dissolving the old gallery chapter orphans
+   nothing. */
+const MEDIA_FOR={
+  'disc:bacteriology':{img:'gpc-clusters'},
+  'disc:mycobacteriology':{img:'afb-stain'},
+  'disc:parasitology':{img:'malaria-smear'},
+  'bsl:1':{img:'bsc'},
+  'bench:urine':{img:'macconkey'},
+  'bench:respiratory':{img:'strep-chains'},
+  'bench:blood':{anim:3},
+  'bench:wound':{img:'pseudomonas'},
+  'step:4':{anim:1},
+  'method:Gram stain':{anim:0},
+  'method:Culture media: selective vs differential':{img:'blood-agar'},
+  'method:Colony morphology and hemolysis':{img:'beta-hemolysis'},
+  'method:Continuous-monitoring blood culture systems':{anim:2},
+  'method:Disk diffusion susceptibility testing':{anim:4},
+  'method:Broth microdilution and gradient strips':{img:'ast-panel'},
+  'method:Targeted PCR and cartridge systems':{anim:5}
+};
+const IMG_BY_SLUG={}; (IMAGES||[]).forEach(i=>IMG_BY_SLUG[i.slug]=i);
+function mediaHtml(key){
+  const m=MEDIA_FOR[key]; if(!m) return '';
+  if(m.anim!==undefined) return `<span class="s-medialabel">Watch it</span><figure class="s-media" data-anim="${m.anim}"></figure>`;
+  const im=IMG_BY_SLUG[m.img]; if(!im) return '';
+  const c=SHOT_CAPTION[im.slug]||[im.label,''];
+  const artist=(im.artist||'').replace(/^(No machine-readable author provided\.?|Unknown author\s*)+/i,'').trim();
+  const credit=[artist&&artist.slice(0,60),'Wikimedia Commons',esc(im.license)].filter(Boolean).join(' &middot; ');
+  return `<span class="s-medialabel">See it</span>
+    <figure class="s-media">
+      <img src="${esc(im.file)}" alt="${esc(c[0])}" loading="lazy" decoding="async" width="${im.w}" height="${im.h}" />
+      <figcaption><b>${esc(c[0])}</b> ${c[1]}
+        <span class="cr">${credit} &middot; <a href="${esc(im.sourceUrl)}" target="_blank" rel="noopener noreferrer">source</a></span>
+      </figcaption>
+    </figure>`;
+}
+/* animations are cloned out of the template wherever they land */
+function mountMedia(st){
+  st.querySelectorAll('.s-media[data-anim]').forEach(fig=>{
+    if(fig.firstElementChild) return;
+    const n=document.getElementById('animTpl').content.querySelectorAll('.anim')[+fig.dataset.anim];
+    if(n) fig.appendChild(n.cloneNode(true));
+  });
+}
+/* six organisms with a note each is a wall of text; show the name, flip for the rest */
+function idCards(list,colour){
+  if(!list||!list.length) return '';
+  return `<div class="idgrid">`+list.map(o=>`
+    <button class="idcard" style="--c:var(--${colour})" aria-pressed="false">
+      <span class="idface idfront"><b>${esc(o.name)}</b><span class="idhint">Flip</span></span>
+      <span class="idface idback">${esc(o.note)}</span>
+    </button>`).join('')+`</div>`;
+}
+function wireCards(st){
+  st.querySelectorAll('.idcard').forEach(c=>c.onclick=()=>
+    c.setAttribute('aria-pressed',String(c.classList.toggle('on'))));
+}
+function afterSlide(st){ mountMedia(st); wireCards(st); }
 
 /* --- algorithm tree --- */
 function tNodeHtml(t,id,ans,note,depth,seen){
@@ -1309,7 +1398,7 @@ let cur=0;
 function go(i,push){
   cur=Math.max(0,Math.min(SL.length-1,i));
   const s=SL[cur], stage=$('#stage');
-  stage.className='stage'+(s.wide?' wide':'');
+  stage.className=s.wide?'wide':'';
   stage.innerHTML=s.html();
   if(s.after) s.after(stage);
   const ti=tabOf(cur), t=TABS[ti];
