@@ -12,38 +12,20 @@ A **fun, compact, interactive** one-day orientation to the hospital clinical mic
 
 ## How it is organised
 
-Type is set from a 17px root on a deliberate scale — nothing renders below 12.4px,
-and reading copy sits at 16.5-18px. Within a chapter, the densest material is behind
-a segmented control (biosafety, the report, the recap) or an accordion (the fourteen
-test methods), and the glossary is a uniform list of 64 terms that opens the chosen
-definition in one fixed panel rather than reflowing the list.
+Lab Day is a **slide deck**, not a dashboard. One idea per screen, advanced with a
+single Next button (or the arrow keys). There are exactly four controls on screen at
+any time: Contents, the theme toggle, Back and Next. 141 slides across 15 chapters,
+with a Contents overlay to jump between them and shareable per-slide URLs (`#s42`).
 
-The dashboard is split into **ten chapters** shown one at a time — a tab strip in the
-sticky header, a progress hairline, and a previous/next pager at the foot of each
-chapter. Chapter links are shareable (`#biosafety`, `#algorithms`, …) and a legacy
-section anchor still resolves to its chapter. Nothing is a 30,000px scroll any more:
-the largest chapter is the glossary, which you search rather than read.
+`Welcome · Specialties · Biosafety · The journey · The benches · How we test ·
+Algorithms · Watch · Through the scope · The report · Flashcards · Which bench? ·
+Quiz · Glossary · Recap`
 
-`Welcome · Biosafety · Journey · How we test · Watch · Algorithms · Report · Practice · Glossary · Recap`
-
-
-
-| Section | What it does |
-|---|---|
-| **Biosafety** | Biosafety levels 1–4, the non-negotiables, six stop-work sentinel organisms with their bench clues, PPE, exposure first aid and spill response |
-| **The map** | The seven sub-disciplines — bacteriology, virology, mycology, parasitology, mycobacteriology, serology, molecular — each expandable with specimens, methods, organisms, considerations and timing |
-| **The journey** | A clickable 7-step walk from specimen receipt through accessioning, adequacy, direct exam, plating, reading/identification, to susceptibility and reporting |
-| **The benches** | Urine, respiratory, blood, stool, wound and sterile-fluid benches — media set up, incubation, what the tech looks for, common isolates, and each bench's classic trap |
-| **The toolbox** | 14 test methods filterable by family: Gram stain, media, colony morphology, biochemicals, strip assays, disks, rapid antigen, MALDI-TOF, automated ID/AST, blood culture instruments, disk diffusion, broth microdilution, targeted PCR/GeneXpert, multiplex panels/BioFire |
-| **Follow the algorithm** | Twelve identification algorithms (149 nodes) drawn as full branching trees — every test, every answer and every endpoint visible at once. Click any box to light up the route back to the start and read what that step tells you. Covers gram-positive cocci (catalase → coagulase → hemolysis → optochin/bacitracin/bile esculin), gram-negative rods (oxidase → lactose), gram-positive rods, yeast, positive blood culture, anaerobes, CSF and sterile fluids, urine, respiratory, GI, mycobacteria, and reading a susceptibility report |
-| **Watch it work** | Six looping CSS/SVG animations: the four Gram stain steps, streaking for isolation, overnight colony growth, a blood culture flagging positive, disk-diffusion zones, and a PCR amplification curve |
-| **Through the scope** | 10 real freely-licensed stains, plates and bench results, each credited |
-| **Reading the report** | How a report evolves over four stages, the four interpretive categories (S / I / SDD / R), eight pieces of lab dialect translated, critical values, and a turnaround-time table |
-| **Flashcards** | 16 flip cards of the organisms worth recognizing by the end of the day |
-| **Which bench?** | A scored specimen-routing game |
-| **Checkpoint** | 12 quiz questions with instant feedback and a pearl on each |
-
-Plus a searchable 64-term **glossary** and an end-of-day **recap**. Light and dark themes, keyboard accessible, `prefers-reduced-motion` respected.
+Everything that used to be shown at once — ten chapter tabs, three segmented
+controls, two accordions, filter chips and a pip strip — is gone. Each biosafety
+level, each bench, each test method, each report stage, each flashcard and each quiz
+question now has a screen of its own. The glossary stays a single searchable slide
+because that is what a dictionary is for.
 
 ## Run it locally
 
