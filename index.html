@@ -703,7 +703,11 @@ body{min-height:100dvh}
 /* the only two controls on the page */
 .deck{position:sticky;bottom:0;z-index:55;background:color-mix(in srgb,var(--bg) 90%,transparent);
   backdrop-filter:blur(14px) saturate(1.6);border-top:1.5px solid var(--line)}
-.deck-in{max-width:1180px;margin:0 auto;padding:13px clamp(20px,4vw,40px);display:flex;align-items:center;gap:14px}
+.deck-in{max-width:1180px;margin:0 auto;padding:13px clamp(20px,4vw,40px) 9px;display:flex;align-items:center;gap:14px}
+.deck-legal{max-width:1180px;margin:0 auto;padding:0 clamp(20px,4vw,40px) 11px;text-align:center;
+  font-size:.78rem;color:var(--faint);line-height:1.4}
+.deck-legal strong{font-weight:800;color:var(--muted)}
+@media(max-width:520px){.deck-legal{font-size:.75rem}}
 .deck .pos{font-size:.87rem;font-weight:700;color:var(--faint);font-variant-numeric:tabular-nums;margin:0 auto}
 .nav-btn{display:inline-flex;align-items:center;gap:9px;font:inherit;font-size:1rem;font-weight:750;
   padding:12px 24px;border-radius:99px;border:2px solid var(--ctl);background:var(--surface);color:var(--ink);
@@ -823,6 +827,7 @@ body{min-height:100dvh}
     <span class="pos" id="pos"></span>
     <button class="nav-btn primary" id="next">Next &rarr;</button>
   </div>
+  <p class="deck-legal">&copy; 2026 <strong>Omar Z Baba, MD</strong> &middot; All rights reserved &middot; Educational orientation only, not a clinical protocol</p>
 </nav>
 
 
